@@ -64,5 +64,5 @@ export interface Business {
   links: LinkButton[];
   direction: Direction;
   categorys: Category[];
-  galery: GaleryItem[];
+  galery: GaleryItem;
 }

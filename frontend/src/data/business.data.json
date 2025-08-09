@@ -51,20 +51,12 @@
         "title": "Cafeterías"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-201",
-        "title": "Interior de la cafetería",
-        "direction": "direction-101",
-        "image": "interior-buendia-1.jpg"
-      },
-      {
-        "id": "galery-202",
-        "title": "Cafés y pasteles",
-        "direction": "direction-101",
-        "image": "cafes-pasteles-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-201",
+      "title": "Interior de la cafetería",
+      "direction": "direction-101",
+      "image": "interior-buendia-1.jpg"
+    }
   },
   {
     "id": "business-102",
@@ -108,20 +100,12 @@
         "title": "Librerías"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-203",
-        "title": "Estanterías de libros",
-        "direction": "direction-102",
-        "image": "estanteria-libros-1.jpg"
-      },
-      {
-        "id": "galery-204",
-        "title": "Área de lectura",
-        "direction": "direction-102",
-        "image": "area-lectura-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-203",
+      "title": "Estanterías de libros",
+      "direction": "direction-102",
+      "image": "estanteria-libros-1.jpg"
+    }
   },
   {
     "id": "business-103",
@@ -160,26 +144,12 @@
         "title": "Tiendas de Ropa"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-205",
-        "title": "Prendas vintage",
-        "direction": "direction-103",
-        "image": "prendas-vintage-1.jpg"
-      },
-      {
-        "id": "galery-206",
-        "title": "Accesorios",
-        "direction": "direction-103",
-        "image": "accesorios-vintage-1.jpg"
-      },
-      {
-        "id": "galery-207",
-        "title": "Fachada de la tienda",
-        "direction": "direction-103",
-        "image": "fachada-baul.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-205",
+      "title": "Prendas vintage",
+      "direction": "direction-103",
+      "image": "prendas-vintage-1.jpg"
+    }
   },
 
   {
@@ -229,20 +199,12 @@
         "title": "Gimnasios y Deportes"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-301",
-        "title": "Sala de pesas",
-        "direction": "direction-201",
-        "image": "sala-pesas-1.jpg"
-      },
-      {
-        "id": "galery-302",
-        "title": "Área de cardio",
-        "direction": "direction-201",
-        "image": "area-cardio-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-301",
+      "title": "Sala de pesas",
+      "direction": "direction-201",
+      "image": "sala-pesas-1.jpg"
+    }
   },
   {
     "id": "business-202",
@@ -286,20 +248,12 @@
         "title": "Spas y Bienestar"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-303",
-        "title": "Sala de masajes",
-        "direction": "direction-202",
-        "image": "sala-masajes-1.jpg"
-      },
-      {
-        "id": "galery-304",
-        "title": "Zona de relajación",
-        "direction": "direction-202",
-        "image": "zona-relax-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-303",
+      "title": "Sala de masajes",
+      "direction": "direction-202",
+      "image": "sala-masajes-1.jpg"
+    }
   },
   {
     "id": "business-203",
@@ -338,20 +292,12 @@
         "title": "Restaurantes y Parrillas"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-305",
-        "title": "El salón principal",
-        "direction": "direction-203",
-        "image": "salon-asador-1.jpg"
-      },
-      {
-        "id": "galery-306",
-        "title": "Cortes de carne",
-        "direction": "direction-203",
-        "image": "cortes-carne-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-305",
+      "title": "El salón principal",
+      "direction": "direction-203",
+      "image": "salon-asador-1.jpg"
+    }
   },
   {
     "id": "business-204",
@@ -390,20 +336,12 @@
         "title": "Veterinarias"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-307",
-        "title": "Sala de espera",
-        "direction": "direction-204",
-        "image": "sala-espera-arca.jpg"
-      },
-      {
-        "id": "galery-308",
-        "title": "Mascotas felices",
-        "direction": "direction-204",
-        "image": "mascotas-felices-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-307",
+      "title": "Sala de espera",
+      "direction": "direction-204",
+      "image": "sala-espera-arca.jpg"
+    }
   },
   {
     "id": "business-205",
@@ -447,19 +385,11 @@
         "title": "Panaderías y Pastelerías"
       }
     ],
-    "galery": [
-      {
-        "id": "galery-309",
-        "title": "Panes recién hechos",
-        "direction": "direction-205",
-        "image": "panes-horno-1.jpg"
-      },
-      {
-        "id": "galery-310",
-        "title": "Facturas y pasteles",
-        "direction": "direction-205",
-        "image": "facturas-pasteles-1.jpg"
-      }
-    ]
+    "galery": {
+      "id": "galery-309",
+      "title": "Panes recién hechos",
+      "direction": "direction-205",
+      "image": "panes-horno-1.jpg"
+    }
   }
 ]
