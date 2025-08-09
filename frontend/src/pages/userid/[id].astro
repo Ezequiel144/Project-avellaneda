@@ -44,11 +44,11 @@ const currentBusiness = listBusinesses
           <div class="w-full">
             <p>{currentBusiness.longDescription}</p>
           </div>
-          <div class={`flex gap-4`}>
+          <div class={`flex gap-4 w-full `}>
             {currentBusiness.links.map((item) => (
               <a
                 href={item.link}
-                class=" w-1/3 rounded-xl bg-red-500 text-white text-center font-semibold px-4 py-3"
+                class={`${currentBusiness.links.length === 1 ? "w-full" : currentBusiness.links.length === 2 ? "w-1/2" : "w-1/3"} rounded-xl bg-red-500 text-white text-center px-4 py-3 text-xl font-semibold`}
               >
                 {item.title}
               </a>
