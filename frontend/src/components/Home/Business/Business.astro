@@ -1,0 +1,30 @@
+---
+import listBusiness from "../../../data/business.data.json";
+import ButtonCards from "../../UI/Buttons/ButtonCards.astro";
+import Cards from "../../UI/Cards/Tag/Cards.astro";
+import Tag from "../../UI/Cards/Tag/Tag.astro";
+
+/* console.log(listBusiness); */
+---
+
+<section class="flex flex-col w-full py-6 gap-y-6">
+  <article class="flex flex-col gap-y-3">
+    <h2 class="font-semibold text-3xl">Locales</h2>
+    <p class="font-normal text-base text-black/60">
+      Mira todos los locales que están registrados en nuestra web
+    </p>
+  </article>
+  <ul class="flex justify-between flex-wrap gap-5">
+    {
+      listBusiness.map((item) => (
+        <Cards
+          imageLogo={item.imageLogo}
+          title={item.title}
+          tags={item.tags}
+          shortDescription={item.shortDescription}
+        />
+      ))
+    }
+  </ul>
+  <button> Ver locales </button>
+</section>

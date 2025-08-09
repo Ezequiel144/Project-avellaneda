@@ -1,0 +1,27 @@
+---
+const listMenu = [
+  { title: "Galeria", link: "#" },
+  { title: "Locales", link: "#" },
+  { title: "Mapa", link: "/maps" },
+  { title: "Contactar", link: "#" },
+];
+---
+
+<header
+  class="rounded-xl overflow-hidden bg-red-500/40 py-5 px-6 absolute top-12 left-1/2 -translate-1/2 w-full backdrop-blur-lg max-w-[1200px] z-10"
+>
+  <div class="flex justify-between text-white">
+    <a class="text-xl" href="/">logo</a>
+    <nav>
+      <ul class="flex gap-x-3">
+        {
+          listMenu.map((item) => (
+            <li class="text-xl font-normal">
+              <a href={item.link}>{item.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

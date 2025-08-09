@@ -1,0 +1,465 @@
+[
+  {
+    "id": "business-101",
+    "title": "Cafetería El Buen Día",
+    "tags": ["café", "pastelería", "desayuno", "merienda"],
+    "longDescription": "Un lugar ideal para empezar el día con un excelente café y una variedad de pasteles artesanales. Ofrecemos un ambiente tranquilo y acogedor.",
+    "shortDescription": "El mejor café de la ciudad, con pastelería casera y un ambiente relajado.",
+    "frontpage": "cafeteria-buendia.png",
+    "imageLogo": "logo-buendia.png",
+    "socialMedia": [
+      {
+        "id": "social-media-101",
+        "title": "Instagram",
+        "link": "https://www.instagram.com/buendia_cafe"
+      },
+      {
+        "id": "social-media-102",
+        "title": "Facebook",
+        "link": "https://www.facebook.com/buendia_cafe"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-101",
+        "title": "Menú",
+        "link": "https://www.buendia.com/menu"
+      },
+      {
+        "id": "link-buttons-102",
+        "title": "WhatsApp",
+        "link": "https://wa.me/5491122334455"
+      },
+      {
+        "id": "link-buttons-102",
+        "title": "WhatsApp",
+        "link": "https://wa.me/5491122334455"
+      }
+    ],
+    "direction": {
+      "id": "direction-101",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "La Matanza",
+      "postcode": "1755",
+      "street": "Avenida Siempre Viva",
+      "number": "742"
+    },
+    "categorys": [
+      {
+        "id": "category-301",
+        "title": "Cafeterías"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-201",
+        "title": "Interior de la cafetería",
+        "direction": "direction-101",
+        "image": "interior-buendia-1.jpg"
+      },
+      {
+        "id": "galery-202",
+        "title": "Cafés y pasteles",
+        "direction": "direction-101",
+        "image": "cafes-pasteles-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-102",
+    "title": "Librería El Saber",
+    "tags": ["libros", "literatura", "lectura", "cultura"],
+    "longDescription": "Una librería independiente con una cuidada selección de títulos, desde clásicos hasta las últimas novedades. Fomentamos la lectura con clubes y eventos.",
+    "shortDescription": "Amplia selección de libros y un espacio cultural para los amantes de la lectura.",
+    "frontpage": "libreria-saber.jpg",
+    "imageLogo": "logo-saber.png",
+    "socialMedia": [
+      {
+        "id": "social-media-103",
+        "title": "Facebook",
+        "link": "https://www.facebook.com/libreriaelsaber"
+      },
+      {
+        "id": "social-media-104",
+        "title": "Twitter",
+        "link": "https://www.twitter.com/elsaber"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-103",
+        "title": "Página web",
+        "link": "https://www.libreriaelsaber.com"
+      }
+    ],
+    "direction": {
+      "id": "direction-102",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "Ramos Mejía",
+      "postcode": "1704",
+      "street": "Avenida de Mayo",
+      "number": "456"
+    },
+    "categorys": [
+      {
+        "id": "category-302",
+        "title": "Librerías"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-203",
+        "title": "Estanterías de libros",
+        "direction": "direction-102",
+        "image": "estanteria-libros-1.jpg"
+      },
+      {
+        "id": "galery-204",
+        "title": "Área de lectura",
+        "direction": "direction-102",
+        "image": "area-lectura-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-103",
+    "title": "Tienda de Ropa Vintage 'El Baúl'",
+    "tags": ["ropa", "vintage", "moda", "segunda mano"],
+    "longDescription": "Descubre piezas únicas y con historia en nuestra tienda de ropa vintage. Seleccionamos cuidadosamente cada prenda para ofrecerte la mejor calidad y estilo.",
+    "shortDescription": "Ropa vintage de alta calidad para un estilo único y sostenible.",
+    "frontpage": "tienda-baul.jpg",
+    "imageLogo": "logo-baul.png",
+    "socialMedia": [
+      {
+        "id": "social-media-105",
+        "title": "Instagram",
+        "link": "https://www.instagram.com/elbaulvintage"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-104",
+        "title": "WhatsApp",
+        "link": "https://wa.me/5491166778899"
+      }
+    ],
+    "direction": {
+      "id": "direction-103",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "San Justo",
+      "postcode": "1754",
+      "street": "Calle del Baúl",
+      "number": "789"
+    },
+    "categorys": [
+      {
+        "id": "category-303",
+        "title": "Tiendas de Ropa"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-205",
+        "title": "Prendas vintage",
+        "direction": "direction-103",
+        "image": "prendas-vintage-1.jpg"
+      },
+      {
+        "id": "galery-206",
+        "title": "Accesorios",
+        "direction": "direction-103",
+        "image": "accesorios-vintage-1.jpg"
+      },
+      {
+        "id": "galery-207",
+        "title": "Fachada de la tienda",
+        "direction": "direction-103",
+        "image": "fachada-baul.jpg"
+      }
+    ]
+  },
+
+  {
+    "id": "business-201",
+    "title": "Gimnasio Iron Body",
+    "tags": ["gimnasio", "fitness", "entrenamiento", "salud"],
+    "longDescription": "Un gimnasio moderno con equipos de última generación, clases grupales y entrenadores personales calificados. Te ayudamos a alcanzar tus metas de fitness.",
+    "shortDescription": "Tu lugar para entrenar y mejorar tu salud. ¡Únete a nuestra comunidad!",
+    "frontpage": "gimnasio-ironbody.jpg",
+    "imageLogo": "logo-ironbody.png",
+    "socialMedia": [
+      {
+        "id": "social-media-201",
+        "title": "Instagram",
+        "link": "https://www.instagram.com/ironbodygym"
+      },
+      {
+        "id": "social-media-202",
+        "title": "Facebook",
+        "link": "https://www.facebook.com/ironbodygym"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-201",
+        "title": "Planes y precios",
+        "link": "https://www.ironbody.com/planes"
+      },
+      {
+        "id": "link-buttons-202",
+        "title": "Clases",
+        "link": "https://www.ironbody.com/clases"
+      }
+    ],
+    "direction": {
+      "id": "direction-201",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "San Justo",
+      "postcode": "1754",
+      "street": "Calle del Gimnasio",
+      "number": "88"
+    },
+    "categorys": [
+      {
+        "id": "category-401",
+        "title": "Gimnasios y Deportes"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-301",
+        "title": "Sala de pesas",
+        "direction": "direction-201",
+        "image": "sala-pesas-1.jpg"
+      },
+      {
+        "id": "galery-302",
+        "title": "Área de cardio",
+        "direction": "direction-201",
+        "image": "area-cardio-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-202",
+    "title": "Spa Armonía Total",
+    "tags": ["spa", "relax", "masajes", "bienestar", "belleza"],
+    "longDescription": "Un oasis de tranquilidad para escapar del estrés diario. Ofrecemos masajes, tratamientos faciales, y terapias de relajación para revitalizar cuerpo y mente.",
+    "shortDescription": "Relájate y renueva tu energía con nuestros tratamientos de spa.",
+    "frontpage": "spa-armonia.jpg",
+    "imageLogo": "logo-armonia.png",
+    "socialMedia": [
+      {
+        "id": "social-media-203",
+        "title": "Instagram",
+        "link": "https://www.instagram.com/armoniatotalspa"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-203",
+        "title": "Reservar cita",
+        "link": "https://www.armoniatotal.com/reservas"
+      },
+      {
+        "id": "link-buttons-204",
+        "title": "Servicios",
+        "link": "https://www.armoniatotal.com/servicios"
+      }
+    ],
+    "direction": {
+      "id": "direction-202",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "Ramos Mejía",
+      "postcode": "1704",
+      "street": "Avenida de la Paz",
+      "number": "55"
+    },
+    "categorys": [
+      {
+        "id": "category-402",
+        "title": "Spas y Bienestar"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-303",
+        "title": "Sala de masajes",
+        "direction": "direction-202",
+        "image": "sala-masajes-1.jpg"
+      },
+      {
+        "id": "galery-304",
+        "title": "Zona de relajación",
+        "direction": "direction-202",
+        "image": "zona-relax-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-203",
+    "title": "Parrilla El Asador Criollo",
+    "tags": ["parrilla", "asado", "carne", "restaurante"],
+    "longDescription": "Disfruta del auténtico sabor argentino en nuestra parrilla. Cortes de carne premium, empanadas caseras y un ambiente tradicional para compartir en familia.",
+    "shortDescription": "La mejor carne a la parrilla de la región, tradición y sabor.",
+    "frontpage": "parrilla-asador.jpg",
+    "imageLogo": "logo-asador.png",
+    "socialMedia": [
+      {
+        "id": "social-media-204",
+        "title": "Facebook",
+        "link": "https://www.facebook.com/asadorcriollo"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-205",
+        "title": "Reservas",
+        "link": "https://www.asadorcriollo.com/reservas"
+      }
+    ],
+    "direction": {
+      "id": "direction-203",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "González Catán",
+      "postcode": "1759",
+      "street": "Avenida de los Gauchos",
+      "number": "221"
+    },
+    "categorys": [
+      {
+        "id": "category-403",
+        "title": "Restaurantes y Parrillas"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-305",
+        "title": "El salón principal",
+        "direction": "direction-203",
+        "image": "salon-asador-1.jpg"
+      },
+      {
+        "id": "galery-306",
+        "title": "Cortes de carne",
+        "direction": "direction-203",
+        "image": "cortes-carne-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-204",
+    "title": "Veterinaria El Arca",
+    "tags": ["veterinaria", "mascotas", "animales", "salud animal"],
+    "longDescription": "Cuidamos de tus mascotas con amor y profesionalismo. Ofrecemos servicios de consulta, vacunación, cirugías, y peluquería canina y felina.",
+    "shortDescription": "El mejor cuidado para tus compañeros de vida.",
+    "frontpage": "veterinaria-arca.jpg",
+    "imageLogo": "logo-arca.png",
+    "socialMedia": [
+      {
+        "id": "social-media-205",
+        "title": "WhatsApp",
+        "link": "https://wa.me/5491133445566"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-206",
+        "title": "Sacar turno",
+        "link": "https://www.veterinariaelarca.com/turnos"
+      }
+    ],
+    "direction": {
+      "id": "direction-204",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "La Matanza",
+      "postcode": "1755",
+      "street": "Calle de los Animales",
+      "number": "99"
+    },
+    "categorys": [
+      {
+        "id": "category-404",
+        "title": "Veterinarias"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-307",
+        "title": "Sala de espera",
+        "direction": "direction-204",
+        "image": "sala-espera-arca.jpg"
+      },
+      {
+        "id": "galery-308",
+        "title": "Mascotas felices",
+        "direction": "direction-204",
+        "image": "mascotas-felices-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "business-205",
+    "title": "Panadería El Horno de la Abuela",
+    "tags": ["panadería", "pastelería", "dulces", "pan", "facturas"],
+    "longDescription": "El sabor de la tradición en cada bocado. Pan fresco, facturas recién horneadas y pasteles artesanales con las recetas de la abuela, ¡directo a tu mesa!",
+    "shortDescription": "El sabor casero en panes y pasteles, como los de la abuela.",
+    "frontpage": "panaderia-abuela.jpg",
+    "imageLogo": "logo-abuela.png",
+    "socialMedia": [
+      {
+        "id": "social-media-206",
+        "title": "Instagram",
+        "link": "https://www.instagram.com/elhorno_delaabuela"
+      },
+      {
+        "id": "social-media-207",
+        "title": "WhatsApp",
+        "link": "https://wa.me/5491177889900"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-buttons-207",
+        "title": "Pedidos online",
+        "link": "https://www.elhorno.com/pedidos"
+      }
+    ],
+    "direction": {
+      "id": "direction-205",
+      "country": "Argentina",
+      "province": "Buenos Aires",
+      "locality": "Merlo",
+      "postcode": "1722",
+      "street": "Calle del Trigo",
+      "number": "33"
+    },
+    "categorys": [
+      {
+        "id": "category-405",
+        "title": "Panaderías y Pastelerías"
+      }
+    ],
+    "galery": [
+      {
+        "id": "galery-309",
+        "title": "Panes recién hechos",
+        "direction": "direction-205",
+        "image": "panes-horno-1.jpg"
+      },
+      {
+        "id": "galery-310",
+        "title": "Facturas y pasteles",
+        "direction": "direction-205",
+        "image": "facturas-pasteles-1.jpg"
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import listBusiness from "../data/business.data.json";
+import Map from "../components/Maps/Map/Map";
+import CardMap from "../components/Maps/CardMap/CardMap.astro";
+import type { Business } from "../interface";
+import SearchMap from "../components/Maps/SearchMap/SearchMap";
+
+//console.log(listBusiness as Business[]);
+
+const addressQuery = Astro.url.searchParams.get("q");
+---
+
+<Layout>
+  <div class="size-full">
+    <Map client:visible addressQuery={addressQuery} />
+    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col gap-y-2">
+      <SearchMap />
+      <ul class="flex gap-x-3 overflow-auto w-full max-w-[1200px]">
+        {
+          listBusiness.map((item: Business) => (
+            <CardMap
+              title={item.title}
+              tags={item.tags}
+              shortDescription={item.shortDescription}
+              imageLogo={item.imageLogo}
+              direction={item.direction}
+            />
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Layout>

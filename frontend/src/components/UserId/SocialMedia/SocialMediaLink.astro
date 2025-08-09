@@ -1,0 +1,30 @@
+---
+import { AiFillInstagram, AiOutlineTikTok } from "react-icons/ai";
+import { BiLogoFacebook } from "react-icons/bi";
+import { FaLink } from "react-icons/fa";
+
+const { socialMedia } = Astro.props;
+---
+
+<li class="rounded-full bg-red-500 p-2">
+  {
+    socialMedia.title === "Facebook" ? (
+      <a href={socialMedia.link}>
+        <BiLogoFacebook className="text-2xl" />
+      </a>
+    ) : socialMedia.title === "Instagram" ? (
+      <a href={socialMedia.link}>
+        {" "}
+        <AiFillInstagram className="text-2xl" />
+      </a>
+    ) : socialMedia.title === "Tiktok" ? (
+      <a href={socialMedia.link}>
+        <AiOutlineTikTok className="text-2xl" />
+      </a>
+    ) : (
+      <a href={socialMedia.link}>
+        <FaLink className="text-2xl" />
+      </a>
+    )
+  }
+</li>

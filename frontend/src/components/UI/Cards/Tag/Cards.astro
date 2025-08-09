@@ -1,0 +1,40 @@
+---
+import ButtonCards from "../../Buttons/ButtonCards.astro";
+import Tag from "./Tag.astro";
+
+interface PropCard {
+  imageLogo: string;
+  title: string;
+  tags: string[];
+  shortDescription: string;
+}
+
+const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
+---
+
+<li
+  class="w-[282px] h-fit rounded-xl overflow-hidden flex flex-col gap-y-2 border border-black/20 shadow-xl"
+>
+  <a class="w-full h-[220px]" href={`/userid/${title}`}>
+    {
+      imageLogo ? (
+        <img
+          src={`../image/${imageLogo}`}
+          class="size-full object-cover "
+          alt=""
+          onerror="this.onerror=null; this.src='/image/no-image.png';"
+        />
+      ) : (
+        <div class="size-full bg-gray-300" />
+      )
+    }
+  </a>
+  <div class="p-2 flex flex-col gap-y-2">
+    <h3 class="font-semibold text-xl">{title}</h3>
+    <ul class="flex flex-wrap gap-1">
+      {tags.map((subItem) => <Tag title={subItem} />)}
+    </ul>
+    <p>{shortDescription}</p>
+  </div>
+  <ButtonCards title={"Ver local"} link={`/userid/${title}`} />
+</li>

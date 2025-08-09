@@ -1,0 +1,35 @@
+---
+import type { SocialMedia } from "../../../interface";
+import TagUserPerfil from "../../UI/Cards/Tag/TagUserPerfil.astro";
+import SocialMediaLink from "../SocialMedia/SocialMediaLink.astro";
+
+const { imageLogo, title, tags, socialMedia, galery } = Astro.props;
+---
+
+<article class="w-full max-w-[1200px] mx-auto -mt-52 flex gap-x-6">
+  <div class="overflow-hidden rounded-lg size-[282px]">
+    <img
+      class="size-full object-cover"
+      src={`../image/${imageLogo}`}
+      alt="image-perfil-logo"
+      onerror="this.onerror=null; this.src='/image/no-image.png';"
+    />
+  </div>
+  <div
+    class="flex size-fit py-3 px-5 rounded-xl bg-[#1E1E1E]/30 backdrop-blur-lg text-white"
+  >
+    <div class="flex flex-col gap-y-5">
+      <h1 class="text-3xl font-semibold">{title}</h1>
+      <ul class="flex gap-1 flex-wrap">
+        {tags.map((item: string) => <TagUserPerfil title={item} />)}
+      </ul>
+      <ul class="flex gap-x-3 items-center justify-center w-fit">
+        {
+          socialMedia.map((item: SocialMedia) => (
+            <SocialMediaLink socialMedia={item} />
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</article>
