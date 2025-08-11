@@ -1,5 +1,6 @@
 ---
-import ButtonCards from "../components/UI/Buttons/ButtonCards.astro";
+import CardGaleries from "../components/Galeries/CardGaleries.astro";
+import ModalGaleries from "../components/Galeries/ModalGaleries";
 import listGaleries from "../data/Galeries.data.json";
 import Layout from "../layouts/Layout.astro";
 ---
@@ -22,26 +23,18 @@ import Layout from "../layouts/Layout.astro";
   >
     {
       listGaleries.map((item) => (
-        <li class="rounded-xl border border-black/20 p-4 h-[250px] w-full flex flex-col justify-between shadow-lg">
-          <div class="flex justify-between">
-            <div class="flex flex-col">
-              <h3 class="text-3xl font-semibold">{item.title}</h3>
-              <p class="text-base font-normal text-[#A3A3A3]">
-                {item.direction}
-              </p>
-            </div>
-            <div class="size-20 rounded-sm overflow-hidden">
-              <img
-                src={item.image}
-                alt=""
-                class="size-full"
-                onerror="this.onerror=null; this.src='/image/no-image.png';"
-              />
-            </div>
-          </div>
-          <ButtonCards title="Ver Galeria" link="#" />
-        </li>
+        <CardGaleries
+          title={item.title}
+          image={item.image}
+          direction={item.direction}
+          id={item.id}
+        />
       ))
     }
   </ul>
+  <ModalGaleries
+    transition:animate="slide"
+    client:idle
+    listGaleries={listGaleries}
+  />
 </Layout>

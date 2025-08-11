@@ -1,6 +1,7 @@
 ---
+import type { GaleryItem } from "../../interface/business";
 import ButtonCards from "../UI/Buttons/ButtonCards.astro";
-const { title, direction, image } = Astro.props;
+const { title, direction, image, id } = Astro.props as GaleryItem;
 ---
 
 <li
@@ -15,12 +16,15 @@ const { title, direction, image } = Astro.props;
     </div>
     <div class="size-20 rounded-sm overflow-hidden">
       <img
-        src={image}
+        src={`../image/${image}`}
         alt=""
         class="size-full"
         onerror="this.onerror=null; this.src='/image/no-image.png';"
       />
     </div>
   </div>
-  <ButtonCards title="Ver Galeria" link="#" />
+  <ButtonCards
+    title="Ver Galeria"
+    link={`/galeries?m=${encodeURIComponent(id)}`}
+  />
 </li>
