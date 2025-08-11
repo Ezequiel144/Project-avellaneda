@@ -1,0 +1,47 @@
+---
+import ButtonCards from "../components/UI/Buttons/ButtonCards.astro";
+import listGaleries from "../data/Galeries.data.json";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <section class="w-full h-[320px] relative">
+    <h1
+      class="font-semibold text-4xl w-fit absolute left-1/2 top-1/2 -translate-1/2 z-10 text-white"
+    >
+      Galerias
+    </h1>
+    <img
+      src="../image/Pixabay-347468.png"
+      class="size-full object-cover bg-center brightness-50"
+      alt=""
+    />
+  </section>
+  <ul
+    class="w-full max-w-[1200px] mx-auto gap-6 grid grid-cols-2 justify-between my-12"
+  >
+    {
+      listGaleries.map((item) => (
+        <li class="rounded-xl border border-black/20 p-4 h-[250px] w-full flex flex-col justify-between shadow-lg">
+          <div class="flex justify-between">
+            <div class="flex flex-col">
+              <h3 class="text-3xl font-semibold">{item.title}</h3>
+              <p class="text-base font-normal text-[#A3A3A3]">
+                {item.direction}
+              </p>
+            </div>
+            <div class="size-20 rounded-sm overflow-hidden">
+              <img
+                src={item.image}
+                alt=""
+                class="size-full"
+                onerror="this.onerror=null; this.src='/image/no-image.png';"
+              />
+            </div>
+          </div>
+          <ButtonCards title="Ver Galeria" link="#" />
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

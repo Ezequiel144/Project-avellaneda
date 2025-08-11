@@ -1,0 +1,50 @@
+[
+  {
+    "id": "galery-201",
+    "title": "Interior de la cafetería",
+    "direction": "direction-101",
+    "image": "interior-buendia-1.jpg"
+  },
+  {
+    "id": "galery-203",
+    "title": "Estanterías de libros",
+    "direction": "direction-102",
+    "image": "estanteria-libros-1.png"
+  },
+  {
+    "id": "galery-205",
+    "title": "Prendas vintage",
+    "direction": "direction-103",
+    "image": "prendas-vintage-1.jpg"
+  },
+  {
+    "id": "galery-301",
+    "title": "Sala de pesas",
+    "direction": "direction-201",
+    "image": "sala-pesas-1.jpg"
+  },
+  {
+    "id": "galery-303",
+    "title": "Sala de masajes",
+    "direction": "direction-202",
+    "image": "sala-masajes-1.jpg"
+  },
+  {
+    "id": "galery-305",
+    "title": "El salón principal",
+    "direction": "direction-203",
+    "image": "salon-asador-1.jpg"
+  },
+  {
+    "id": "galery-307",
+    "title": "Sala de espera",
+    "direction": "direction-204",
+    "image": "sala-espera-arca.jpg"
+  },
+  {
+    "id": "galery-309",
+    "title": "Panes recién hechos",
+    "direction": "direction-205",
+    "image": "panes-horno-1.jpg"
+  }
+]
