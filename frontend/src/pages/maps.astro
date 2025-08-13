@@ -9,12 +9,15 @@ import SearchMap from "../components/Maps/SearchMap/SearchMap";
 //console.log(listBusiness as Business[]);
 
 const addressQuery = Astro.url.searchParams.get("q");
+console.log("Address Query:", addressQuery);
 ---
 
 <Layout>
   <div class="size-full">
     <Map client:visible addressQuery={addressQuery} />
-    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col gap-y-2">
+    <div
+      class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col gap-y-2"
+    >
       <SearchMap />
       <ul class="flex gap-x-3 overflow-auto w-full max-w-[1200px]">
         {

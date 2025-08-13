@@ -3,6 +3,7 @@ import Navbar from "../components/UI/Navbar/Navbar.astro";
 import "../styles/global.css";
 // Supports weights 100-900
 import "@fontsource-variable/montserrat";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -14,11 +15,12 @@ import "@fontsource-variable/montserrat";
     <meta name="generator" content={Astro.generator} />
     <title>Proyecto avellaneda</title>
   </head>
+
   <body>
     <Navbar />
     <slot />
   </body>
-
+  <ClientRouter />
   <style>
     html,
     body {
