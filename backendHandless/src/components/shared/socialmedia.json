@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_socialmedias",
+  "info": {
+    "displayName": "socialmedia"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "link": {
+      "type": "text",
+      "required": true
+    }
+  },
+  "config": {}
+}

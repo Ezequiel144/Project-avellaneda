@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_directions",
+  "info": {
+    "displayName": "direction"
+  },
+  "options": {},
+  "attributes": {
+    "country": {
+      "type": "text",
+      "maxLength": 150,
+      "required": true
+    },
+    "province": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "locality": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "postalcode": {
+      "type": "integer",
+      "required": true
+    },
+    "street": {
+      "type": "string",
+      "maxLength": 200,
+      "required": true
+    },
+    "number": {
+      "type": "integer",
+      "required": true
+    }
+  },
+  "config": {}
+}
