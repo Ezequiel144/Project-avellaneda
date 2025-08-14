@@ -28,7 +28,7 @@
     "direction": {
       "type": "component",
       "component": "shared.direction",
-      "repeatable": true
+      "repeatable": false
     }
   }
 }

@@ -498,7 +498,7 @@ export interface ApiGaleryGalery extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    direction: Schema.Attribute.Component<'shared.direction', true>;
+    direction: Schema.Attribute.Component<'shared.direction', false>;
     idgaleries: Schema.Attribute.UID;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

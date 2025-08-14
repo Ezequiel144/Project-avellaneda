@@ -8,7 +8,7 @@ export interface Direction {
   country: string;
   province: string;
   locality: string;
-  postcode: number /* string */;
+  postalcode?: number /* string */;
   street: string;
   number: number /* string */;
 }
@@ -45,8 +45,12 @@ export interface Category {
 export interface GaleryItem {
   id: string;
   title: string;
-  direction: string; // Referencia a la dirección del negocio (opcional, en este caso coincide)
-  image?: string;
+  direction: Direction; // Referencia a la dirección del negocio (opcional, en este caso coincide)
+  image?: {
+    id: string;
+    documentId: string;
+    url: string;
+  };
   documentId: string;
   idgaleries: string;
   createdAt?: string;
