@@ -1,19 +1,15 @@
 ---
-import type { Direction } from "../../../interface";
+import envVariants from "../../../helpers/envVariants";
+import type { Direction, PropCardMap } from "../../../interface";
 import ButtonCardMap from "../../UI/Buttons/ButtonCardMap.astro";
 import Tag from "../../UI/Cards/Tag/Tag.astro";
 
-interface PropCardMap {
-  title: string;
-  tags: string[];
-  shortDescription: string;
-  imageLogo: string;
-  direction: Direction;
-}
+const { URL_STRAPI } = envVariants();
+
 const { title, tags, shortDescription, imageLogo, direction } =
   Astro.props as PropCardMap;
 
-const fullAddress = `${direction.street} ${direction.number}, ${direction.locality}, ${direction.province}, ${direction.country}`;
+const fullAddress = `${direction.street} ${direction.number.toString()}, ${direction.locality}, ${direction.province}, ${direction.country}`;
 
 // 2. Codificamos la dirección para la URL
 const encodedAddress = encodeURIComponent(fullAddress);
@@ -25,18 +21,24 @@ const mapPageUrl = `/maps?q=${encodedAddress}`;
 <li class="bg-white rounded-xl w-fit h-fit shadow-lg flex gap-x-6 p-3">
   <a class="" href={`/userid/${title}`}>
     <div class="size-[180px] rounded-lg overflow-hidden">
-      <img
-        src={`./image/${imageLogo}`}
-        class="size-full object-cover"
-        alt={`image-${title}`}
-        onerror="this.onerror=null; this.src='/image/no-image.png';"
-      />
+      {
+        imageLogo ? (
+          <img
+            src={`${URL_STRAPI}${imageLogo}`}
+            class="size-full object-cover"
+            alt={`image-${title}`}
+            onerror="this.onerror=null; this.src='/image/no-image.png';"
+          />
+        ) : (
+          <div class="size-full bg-gray-300" />
+        )
+      }
     </div>
   </a>
   <div class="w-[240px] flex flex-col gap-y-3">
     <h3 class="font-semibold text-xl tracking-normal truncate">{title}</h3>
     <ul class="flex gap-1 flex-wrap w-full">
-      {tags.map((subItem) => <Tag title={subItem} />)}
+      {tags.map((subItem) => <Tag title={subItem.itemtag} />)}
     </ul>
     <p class="text-sm">{shortDescription}</p>
     <ButtonCardMap title="Ver negocio" link={mapPageUrl} />

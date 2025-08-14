@@ -8,9 +8,9 @@ export interface Direction {
   country: string;
   province: string;
   locality: string;
-  postcode: string;
+  postcode: number /* string */;
   street: string;
-  number: string;
+  number: number /* string */;
 }
 
 /**
@@ -65,4 +65,16 @@ export interface Business {
   direction: Direction;
   categorys: Category[];
   galery: GaleryItem;
+}
+
+export interface BusinessItemCard {
+  id: string;
+  title: string;
+  tags: string[];
+  shortdescription: string;
+  imagelogo: { url: string };
+}
+
+export interface BusinessItemCardMap extends BusinessItemCard {
+  directions: Direction;
 }

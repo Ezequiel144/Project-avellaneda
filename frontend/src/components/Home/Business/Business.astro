@@ -1,6 +1,6 @@
 ---
 //import listBusiness from "../../../data/business.data.json";
-import type { Business } from "../../../interface";
+import type { Business, BusinessItemCard } from "../../../interface";
 import { strapiFetch } from "../../../utils/fetch";
 import Cards from "../../UI/Cards/Tag/Cards.astro";
 
@@ -25,7 +25,7 @@ const listBusiness = res.data;
   </article>
   <ul class="flex justify-between flex-wrap gap-5">
     {
-      listBusiness.map((item: any) => (
+      listBusiness.map((item: BusinessItemCard) => (
         <Cards
           imageLogo={item.imagelogo.url}
           title={item.title}
