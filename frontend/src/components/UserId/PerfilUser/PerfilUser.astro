@@ -1,13 +1,12 @@
 ---
 import { FaWarehouse } from "react-icons/fa";
+import envVariants from "../../../helpers/envVariants";
 import type {
-  GaleryItem,
   PropsPerfilUser,
-  SocialMedia,
+  SocialMedia
 } from "../../../interface";
 import TagUserPerfil from "../../UI/Cards/Tag/TagUserPerfil.astro";
 import SocialMediaLink from "../SocialMedia/SocialMediaLink.astro";
-import envVariants from "../../../helpers/envVariants";
 
 const { imageLogo, title, tags, socialMedia, galery } =
   Astro.props as PropsPerfilUser;
