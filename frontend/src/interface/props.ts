@@ -1,4 +1,4 @@
-import type { Direction } from "./business";
+import type { Direction, GaleryItem, SocialMedia } from "./business";
 
 export interface PropCard {
   imageLogo: string;
@@ -13,4 +13,13 @@ export interface PropCardMap {
   shortDescription: string;
   imageLogo: string;
   direction: Direction;
+}
+
+
+export interface PropsPerfilUser {
+  imageLogo: string;
+  title: string;
+  tags: { itemtag: string }[];
+  socialMedia: SocialMedia[];
+  galery?: GaleryItem ;
 }

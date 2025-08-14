@@ -498,6 +498,7 @@ export interface ApiGaleryGalery extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    direction: Schema.Attribute.Component<'shared.direction', true>;
     idgaleries: Schema.Attribute.UID;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -540,41 +541,6 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiLinkbuttonsimpleLinkbuttonsimple
-  extends Struct.SingleTypeSchema {
-  collectionName: 'linkbuttonsimples';
-  info: {
-    displayName: 'linkbuttonsimple';
-    pluralName: 'linkbuttonsimples';
-    singularName: 'linkbuttonsimple';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    businesses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::business.business'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Idlinkbuttonssimple: Schema.Attribute.UID;
-    link: Schema.Attribute.Text & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::linkbuttonsimple.linkbuttonsimple'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1095,7 +1061,6 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::galery.galery': ApiGaleryGalery;
       'api::global.global': ApiGlobalGlobal;
-      'api::linkbuttonsimple.linkbuttonsimple': ApiLinkbuttonsimpleLinkbuttonsimple;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

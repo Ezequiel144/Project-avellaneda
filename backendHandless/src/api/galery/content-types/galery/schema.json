@@ -24,6 +24,11 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "direction": {
+      "type": "component",
+      "component": "shared.direction",
+      "repeatable": true
     }
   }
 }

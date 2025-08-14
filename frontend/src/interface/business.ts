@@ -46,7 +46,12 @@ export interface GaleryItem {
   id: string;
   title: string;
   direction: string; // Referencia a la dirección del negocio (opcional, en este caso coincide)
-  image: string;
+  image?: string;
+  documentId: string;
+  idgaleries: string;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }
 
 /**
@@ -70,11 +75,21 @@ export interface Business {
 export interface BusinessItemCard {
   id: string;
   title: string;
-  tags: string[];
+  tags: { itemtag: string }[];
   shortdescription: string;
   imagelogo: { url: string };
 }
 
 export interface BusinessItemCardMap extends BusinessItemCard {
   directions: Direction;
+}
+
+export interface BusinessItemUserId extends BusinessItemCard {
+  longdescription: string;
+  frontpage: { url: string };
+  imagelogo: { url: string };
+  socialmedia: SocialMedia[];
+  linksbuttons: LinkButton[];
+  categorys: Category[];
+  galery?: GaleryItem;
 }
