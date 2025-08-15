@@ -1,8 +1,21 @@
 ---
 import CardGaleries from "../components/Galeries/CardGaleries.astro";
 import ModalGaleries from "../components/Galeries/ModalGaleries";
-import listGaleries from "../data/Galeries.data.json";
+import type { GaleryItem } from "../interface";
+//import listGaleries from "../data/Galeries.data.json";
 import Layout from "../layouts/Layout.astro";
+import { strapiFetch } from "../utils/fetch";
+
+const res = await strapiFetch(
+  "/galeries?populate[image][fields][0]=url&populate=direction",
+  {
+    method: "GET",
+  }
+);
+
+//console.log(res.data);
+
+const listGaleries = res.data as GaleryItem[];
 ---
 
 <Layout>

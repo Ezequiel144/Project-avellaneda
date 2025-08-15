@@ -1,15 +1,24 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import listBusiness from "../data/business.data.json";
-import Map from "../components/Maps/Map/Map";
 import CardMap from "../components/Maps/CardMap/CardMap.astro";
-import type { Business } from "../interface";
+import Map from "../components/Maps/Map/Map";
 import SearchMap from "../components/Maps/SearchMap/SearchMap";
+//import listBusiness from "../data/business.data.json";
+import type { BusinessItemCardMap } from "../interface";
+import Layout from "../layouts/Layout.astro";
+import { strapiFetch } from "../utils/fetch";
 
-//console.log(listBusiness as Business[]);
 
 const addressQuery = Astro.url.searchParams.get("q");
-console.log("Address Query:", addressQuery);
+
+const res = await strapiFetch(
+  "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate[directions]=*",
+  {
+    method: "GET",
+  }
+);
+
+//console.log(res.data);
+const listBusiness = res.data;
 ---
 
 <Layout>
@@ -21,13 +30,13 @@ console.log("Address Query:", addressQuery);
       <SearchMap />
       <ul class="flex gap-x-3 overflow-auto w-full max-w-[1200px]">
         {
-          listBusiness.map((item: Business) => (
+          listBusiness.map((item: BusinessItemCardMap) => (
             <CardMap
               title={item.title}
               tags={item.tags}
-              shortDescription={item.shortDescription}
-              imageLogo={item.imageLogo}
-              direction={item.direction}
+              shortDescription={item.shortdescription}
+              imageLogo={item.imagelogo.url}
+              direction={item.directions}
             />
           ))
         }

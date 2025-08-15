@@ -1,10 +1,19 @@
 ---
-import listBusiness from "../../../data/business.data.json";
-import ButtonCards from "../../UI/Buttons/ButtonCards.astro";
+//import listBusiness from "../../../data/business.data.json";
+import type { Business, BusinessItemCard } from "../../../interface";
+import { strapiFetch } from "../../../utils/fetch";
 import Cards from "../../UI/Cards/Tag/Cards.astro";
-import Tag from "../../UI/Cards/Tag/Tag.astro";
 
 /* console.log(listBusiness); */
+
+const res = await strapiFetch(
+  "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*",
+  {
+    method: "GET",
+  }
+);
+
+const listBusiness = res.data;
 ---
 
 <section class="flex flex-col w-full py-6 gap-y-6">
@@ -16,12 +25,12 @@ import Tag from "../../UI/Cards/Tag/Tag.astro";
   </article>
   <ul class="flex justify-between flex-wrap gap-5">
     {
-      listBusiness.map((item) => (
+      listBusiness.map((item: BusinessItemCard) => (
         <Cards
-          imageLogo={item.imageLogo}
+          imageLogo={item.imagelogo.url}
           title={item.title}
           tags={item.tags}
-          shortDescription={item.shortDescription}
+          shortDescription={item.shortdescription}
         />
       ))
     }

@@ -1,13 +1,10 @@
 ---
 import ButtonCards from "../../Buttons/ButtonCards.astro";
 import Tag from "./Tag.astro";
+import envVariants from "../../../../helpers/envVariants";
+import type { PropCard } from "../../../../interface/props";
 
-interface PropCard {
-  imageLogo: string;
-  title: string;
-  tags: string[];
-  shortDescription: string;
-}
+const { URL_STRAPI } = envVariants();
 
 const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
 ---
@@ -19,7 +16,7 @@ const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
     {
       imageLogo ? (
         <img
-          src={`../image/${imageLogo}`}
+          src={`${URL_STRAPI}${imageLogo}`}
           class="size-full object-cover "
           alt=""
           onerror="this.onerror=null; this.src='/image/no-image.png';"
@@ -32,7 +29,7 @@ const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
   <div class="p-2 flex flex-col gap-y-2">
     <h3 class="font-semibold text-xl">{title}</h3>
     <ul class="flex flex-wrap gap-1">
-      {tags.map((subItem) => <Tag title={subItem} />)}
+      {tags.map((subItem) => <Tag title={subItem.itemtag} />)}
     </ul>
     <p>{shortDescription}</p>
   </div>

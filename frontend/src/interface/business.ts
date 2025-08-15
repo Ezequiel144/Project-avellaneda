@@ -8,9 +8,9 @@ export interface Direction {
   country: string;
   province: string;
   locality: string;
-  postcode: string;
+  postalcode?: number /* string */;
   street: string;
-  number: string;
+  number: number /* string */;
 }
 
 /**
@@ -37,16 +37,26 @@ export interface LinkButton {
 export interface Category {
   id: string;
   title: string;
+  types?: string;
 }
 
 /**
  * Representa una imagen dentro de la galería de un negocio.
  */
 export interface GaleryItem {
-  id: string;
+  id: number /* string; */;
   title: string;
-  direction: string; // Referencia a la dirección del negocio (opcional, en este caso coincide)
-  image: string;
+  direction: Direction; // Referencia a la dirección del negocio (opcional, en este caso coincide)
+  image?: {
+    id: string;
+    documentId: string;
+    url: string;
+  };
+  documentId: string;
+  idgaleries: string;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }
 
 /**
@@ -64,5 +74,31 @@ export interface Business {
   links: LinkButton[];
   direction: Direction;
   categorys: Category[];
+  galery: GaleryItem;
+}
+
+export interface BusinessItemCard {
+  id: string;
+  title: string;
+  tags: { itemtag: string }[];
+  shortdescription: string;
+  imagelogo: { url: string };
+}
+
+export interface BusinessItemCardMap extends BusinessItemCard {
+  directions: Direction;
+}
+
+export interface BusinessItemUserId extends BusinessItemCard {
+  longdescription: string;
+  frontpage: { url: string };
+  imagelogo: { url: string };
+  socialmedia: SocialMedia[];
+  linksbuttons: LinkButton[];
+  categorys: Category[];
+  galery?: GaleryItem;
+}
+
+export interface BusinessItemCardGalery extends BusinessItemCard {
   galery: GaleryItem;
 }
