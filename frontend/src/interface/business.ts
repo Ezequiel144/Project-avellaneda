@@ -37,13 +37,14 @@ export interface LinkButton {
 export interface Category {
   id: string;
   title: string;
+  types?: string;
 }
 
 /**
  * Representa una imagen dentro de la galería de un negocio.
  */
 export interface GaleryItem {
-  id: string;
+  id: number /* string; */;
   title: string;
   direction: Direction; // Referencia a la dirección del negocio (opcional, en este caso coincide)
   image?: {
@@ -96,4 +97,8 @@ export interface BusinessItemUserId extends BusinessItemCard {
   linksbuttons: LinkButton[];
   categorys: Category[];
   galery?: GaleryItem;
+}
+
+export interface BusinessItemCardGalery extends BusinessItemCard {
+  galery: GaleryItem;
 }

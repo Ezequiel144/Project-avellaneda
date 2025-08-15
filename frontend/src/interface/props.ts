@@ -23,3 +23,10 @@ export interface PropsPerfilUser {
   socialMedia: SocialMedia[];
   galery?: GaleryItem ;
 }
+
+export interface PropCardGalery {
+  title: string;
+  imageLogo: { url: string };
+  tags: { itemtag: string }[];
+  shortDescription: string;
+}

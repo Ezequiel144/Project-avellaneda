@@ -20,6 +20,12 @@
       "components": [
         "shared.slider"
       ]
+    },
+    "h": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.tag"
+      ]
     }
   }
 }

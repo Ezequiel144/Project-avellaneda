@@ -1,17 +1,13 @@
-
-interface Prop {
-  title: string;
-  imageLogo?: string;
-  tags: string[];
-  shortDescription: string;
-}
+import envVariants from "../../../helpers/envVariants";
+import type { PropCardGalery } from "../../../interface";
 
 export default function ReactCardGalery({
   title,
   imageLogo,
   tags,
   shortDescription,
-}: Prop) {
+}: PropCardGalery) {
+  const { URL_STRAPI } = envVariants();
   return (
     <li className="w-fit max-h-[320px] rounded-xl overflow-hidden flex gap-5 border border-black/20 shadow-xl p-6">
       <a
@@ -20,9 +16,9 @@ export default function ReactCardGalery({
       >
         {imageLogo ? (
           <img
-            src={`../image/${imageLogo}`}
+            src={`${URL_STRAPI}${imageLogo.url}`}
             className="size-full object-cover "
-            alt=""
+            alt={title}
             onError={(e) => {
               const target = e.currentTarget;
               target.onerror = null;
@@ -37,9 +33,12 @@ export default function ReactCardGalery({
         <div className="p-2 flex flex-col gap-y-2">
           <h3 className="font-semibold text-xl">{title}</h3>
           <ul className="flex flex-wrap gap-1">
-            {tags.map((subItem) => (
-              <li className="w-fit text-sm px-2 py-1 rounded-md bg-blue-500/10 text-blue-500/80 capitalize">
-                {subItem}
+            {tags.map((subItem, index) => (
+              <li
+                key={index}
+                className="w-fit text-sm px-2 py-1 rounded-md bg-blue-500/10 text-blue-500/80 capitalize"
+              >
+                {subItem.itemtag}
               </li>
             ))}
           </ul>

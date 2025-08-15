@@ -24,6 +24,16 @@
       "relation": "manyToOne",
       "target": "api::business.business",
       "inversedBy": "categories"
+    },
+    "types": {
+      "type": "enumeration",
+      "enum": [
+        "Indumentarias",
+        "Comidas",
+        "Cafeterias",
+        "Tecnologias",
+        "Escolar"
+      ]
     }
   }
 }

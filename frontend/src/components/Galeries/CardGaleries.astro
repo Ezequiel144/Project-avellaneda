@@ -2,6 +2,7 @@
 import envVariants from "../../helpers/envVariants";
 import type { GaleryItem } from "../../interface/business";
 import ButtonCards from "../UI/Buttons/ButtonCards.astro";
+
 const { title, direction, image, id } = Astro.props as GaleryItem;
 
 const { URL_STRAPI } = envVariants();
@@ -18,7 +19,7 @@ const { URL_STRAPI } = envVariants();
         direction ? (
           <p class="text-base font-normal text-[#A3A3A3]">
             {direction.country} ,{direction.province} ,{direction.locality} ,
-            {direction?.postalcode} ,{direction.street} ,{direction.number}
+            {direction?.postalcode} ,{direction.street} {direction.number}
           </p>
         ) : (
           <p class="text-base font-normal text-[#A3A3A3]">Sin direccion</p>
