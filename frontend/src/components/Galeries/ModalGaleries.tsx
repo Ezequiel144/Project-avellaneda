@@ -82,8 +82,8 @@ export default function ModalGaleries({
         </div>
         <h2 className="text-3xl font-semibold">{galery?.title}</h2>
         <p className="text-base font-normal text-[#A3A3A3] capitalize">
-          {galery?.direction.country}, {galery?.direction.province}, {" "}
-          {galery?.direction.locality}, {galery?.direction.postalcode}, {" "}
+          {galery?.direction.country}, {galery?.direction.province},{" "}
+          {galery?.direction.locality}, {galery?.direction.postalcode},{" "}
           {galery?.direction.street} {galery?.direction.number}
         </p>
         <a

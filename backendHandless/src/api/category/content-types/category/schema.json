@@ -27,6 +27,7 @@
     },
     "types": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Indumentarias",
         "Comidas",
