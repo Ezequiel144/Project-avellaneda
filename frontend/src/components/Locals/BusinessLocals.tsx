@@ -34,12 +34,49 @@ export default function BusinessLocals() {
     seyIsFilterCategory(filtered);
   };
 
+  const fetchAndSearch = async (id: string) => {
+    const res = await strapiFetch(
+      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=categories",
+      {
+        method: "GET",
+      }
+    );
+    const fetchBusiness = res.data as BusinessItemCard[];
+
+    const filtered = id
+      ? fetchBusiness.filter((item) => {
+          // 1. Condición para el título de la categoría
+          const isCategoryMatch = item.categories?.some(
+            (subItem) =>
+              subItem.title.toLocaleLowerCase() === id.toLocaleLowerCase()
+          );
+
+          // 2. Condición para la descripción
+          const isDescriptionMatch = item.shortdescription
+            ?.toLocaleLowerCase()
+            .includes(id.toLocaleLowerCase());
+
+          // 3. Condición para los tags
+          const isTagMatch = item.tags?.some(
+            (tag) => tag.itemtag.toLocaleLowerCase() === id.toLocaleLowerCase()
+          );
+
+          // El item se mantiene si al menos una de las condiciones es verdadera
+          return isCategoryMatch || isDescriptionMatch || isTagMatch;
+        })
+      : fetchBusiness;
+    seyIsFilterCategory(filtered);
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const idSearch = params.get("s");
     const idCategory = params.get("c");
     //console.log(idCategory);
-    if (idCategory) {
+    if (idCategory && !idSearch) {
       fetchAndFilter(idCategory);
+    } else if (idSearch && !idCategory) {
+      fetchAndSearch(idSearch);
     } else {
       fetchAndFilter("");
     }
