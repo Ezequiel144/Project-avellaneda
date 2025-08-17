@@ -37,7 +37,12 @@ export interface LinkButton {
 export interface Category {
   id: string;
   title: string;
-  types?: string;
+  types: string;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  idcategories: string;
 }
 
 /**
@@ -83,6 +88,7 @@ export interface BusinessItemCard {
   tags: { itemtag: string }[];
   shortdescription: string;
   imagelogo: { url: string };
+  categories?: Category[];
 }
 
 export interface BusinessItemCardMap extends BusinessItemCard {
@@ -95,7 +101,7 @@ export interface BusinessItemUserId extends BusinessItemCard {
   imagelogo: { url: string };
   socialmedia: SocialMedia[];
   linksbuttons: LinkButton[];
-  categorys: Category[];
+  //categorys: Category[];
   galery?: GaleryItem;
 }
 

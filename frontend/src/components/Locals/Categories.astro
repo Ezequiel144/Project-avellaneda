@@ -1,0 +1,23 @@
+---
+import type { Category } from "../../interface";
+import { strapiFetch } from "../../utils/fetch";
+import ButtonCategories from "./ButtonCategories";
+
+const res = await strapiFetch("/categories", {
+  method: "GET",
+});
+
+const { data: categories }: { data: Category[] } = res;
+
+const typesCategories = categories.map((item) => item.types);
+
+const uniqueTypesCategories = [...new Set(typesCategories)];
+---
+
+<ul class="flex flex-col gap-y-4">
+  {
+    uniqueTypesCategories.map((item) => (
+      <ButtonCategories client:idle item={item} categories={categories} />
+    ))
+  }
+</ul>

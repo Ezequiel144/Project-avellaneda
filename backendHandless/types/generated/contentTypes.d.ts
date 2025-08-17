@@ -481,7 +481,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       }>;
     types: Schema.Attribute.Enumeration<
       ['Indumentarias', 'Comidas', 'Cafeterias', 'Tecnologias', 'Escolar']
-    >;
+    > &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

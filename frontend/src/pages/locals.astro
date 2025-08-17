@@ -1,0 +1,24 @@
+---
+import BusinessLocals from "../components/Locals/BusinessLocals";
+import Categories from "../components/Locals/Categories.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <section class="w-full h-[320px] relative">
+    <h1
+      class="font-semibold text-4xl w-fit absolute left-1/2 top-1/2 -translate-1/2 z-10 text-white"
+    >
+      Locales
+    </h1>
+    <img
+      src="../image/Pixabay-347468.png"
+      class="size-full object-cover bg-center brightness-50"
+      alt="image-locals"
+    />
+  </section>
+  <section class="w-full max-w-[1200px] mx-auto my-12 flex flex-col gap-y-10">
+    <Categories />
+    <BusinessLocals client:visible />
+  </section>
+</Layout>
