@@ -1,6 +1,7 @@
 ---
 import type { Category } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
+import ButtonCategories from "./ButtonCategories";
 
 const res = await strapiFetch("/categories", {
   method: "GET",
@@ -10,32 +11,13 @@ const { data: categories }: { data: Category[] } = res;
 
 const typesCategories = categories.map((item) => item.types);
 
-const filterCategories = (category: string) => {
-  const filtered = categories.filter(
-    (item) => item.types?.toLocaleLowerCase() === category.toLocaleLowerCase()
-  );
-  return filtered || [];
-};
+const uniqueTypesCategories = [...new Set(typesCategories)];
 ---
 
 <ul class="flex flex-col gap-y-4">
   {
-    typesCategories.map((item) => (
-      <li class="flex flex-col gap-y-2">
-        <span class="font-semibold text-xl">{item}</span>
-        <ul>
-          {filterCategories(item).map((subItem: Category) => (
-            <li>
-              <a
-                class="bg-red-white text-red-500 border border-red-500 rounded-lg py-2 px-3 size-fit capitalize"
-                href={`/locals?c=${subItem.title}`}
-              >
-                {subItem.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </li>
+    uniqueTypesCategories.map((item) => (
+      <ButtonCategories client:idle item={item} categories={categories} />
     ))
   }
 </ul>

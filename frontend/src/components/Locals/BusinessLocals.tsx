@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
+import Cards from "../UI/Cards/Tag/Cards.astro";
+import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
 
 export default function BusinessLocals() {
   const [isFilterCategory, seyIsFilterCategory] = useState<BusinessItemCard[]>(
@@ -46,9 +48,15 @@ export default function BusinessLocals() {
   //console.log(isFilterCategory);
 
   return (
-    <ul>
+    <ul className="flex gap-5">
       {isFilterCategory.map((item) => (
-        <li key={item.id}>{item.title}</li>
+        <ReactCardFilter
+          key={item.id}
+          imageLogo={item.imagelogo.url}
+          title={item.title}
+          tags={item.tags}
+          shortDescription={item.shortdescription}
+        />
       ))}
     </ul>
   );
