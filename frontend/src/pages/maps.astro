@@ -1,14 +1,15 @@
 ---
-import CardMap from "../components/Maps/CardMap/CardMap.astro";
 import Map from "../components/Maps/Map/Map";
 import SearchMap from "../components/Maps/SearchMap/SearchMap";
+import { normalizeString } from "../helpers/deleteAcent";
 //import listBusiness from "../data/business.data.json";
+import ContentCardMap from "../components/Maps/ContentCardMap/ContentCardMap";
 import type { BusinessItemCardMap } from "../interface";
 import Layout from "../layouts/Layout.astro";
 import { strapiFetch } from "../utils/fetch";
 
-
 const addressQuery = Astro.url.searchParams.get("q");
+const getQuerySearch = Astro.url.searchParams.get("s");
 
 const res = await strapiFetch(
   "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate[directions]=*",
@@ -16,9 +17,27 @@ const res = await strapiFetch(
     method: "GET",
   }
 );
+/* const listBusiness = getQuerySearch
+  ? res.data.filter((item: BusinessItemCardMap) => {
+      //1.Condicion para el titulo
+      const isTitle = normalizeString(item.title)
+        .toLocaleLowerCase()
+        .includes(normalizeString(getQuerySearch).toLocaleLowerCase());
 
-//console.log(res.data);
-const listBusiness = res.data;
+      // 2. Condición para la descripción
+      const isDescriptionMatch = normalizeString(
+        item.shortdescription?.toLocaleLowerCase()
+      ).includes(normalizeString(getQuerySearch.toLocaleLowerCase()));
+
+      // 3. Condición para los tags
+      const isTagMatch = item.tags?.some(
+        (tag) =>
+          normalizeString(tag.itemtag.toLocaleLowerCase()) ===
+          normalizeString(getQuerySearch.toLocaleLowerCase())
+      );
+      return isTitle || isDescriptionMatch || isTagMatch;
+    })
+  : res.data; */
 ---
 
 <Layout>
@@ -27,20 +46,8 @@ const listBusiness = res.data;
     <div
       class="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col gap-y-2"
     >
-      <SearchMap />
-      <ul class="flex gap-x-3 overflow-auto w-full max-w-[1200px]">
-        {
-          listBusiness.map((item: BusinessItemCardMap) => (
-            <CardMap
-              title={item.title}
-              tags={item.tags}
-              shortDescription={item.shortdescription}
-              imageLogo={item.imagelogo.url}
-              direction={item.directions}
-            />
-          ))
-        }
-      </ul>
+      <SearchMap client:idle />
+      <ContentCardMap client:idle />
     </div>
   </div>
 </Layout>

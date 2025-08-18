@@ -1,5 +1,6 @@
 ---
 import { BiSolidMap } from "react-icons/bi";
+import Search from "./Search/Search";
 ---
 
 <section
@@ -17,23 +18,7 @@ import { BiSolidMap } from "react-icons/bi";
       cras. Ipsum lectus elit velit iaculis
     </p>
   </article>
-  <div class="flex flex-col w-full max-w-[740px] gap-y-3">
-    <article class="flex items-center gap-x-6 w-full">
-      <input
-        type="text"
-        class="bg-[#B3B3B3]/50 px-4 py-4 rounded-lg w-full"
-        placeholder="Que vas a comprar"
-      />
-      <button
-        class="px-8 h-full bg-red-500 rounded-lg text-xl font-semibold cursor-pointer"
-        >Buscar</button
-      >
-    </article>
-    <button
-      class="px-8 py-4 h-full bg-red-500 rounded-lg text-xl font-semibold cursor-pointer flex items-center justify-center gap-x-2"
-      ><BiSolidMap className="text-2xl" /> Ver locales en mapa</button
-    >
-  </div>
+  <Search client:idle />
   <img
     src={"../image/Pixabay-347468.png"}
     class="w-full h-full object-cover bg-center brightness-50 absolute top-0 left-0 -z-10"
