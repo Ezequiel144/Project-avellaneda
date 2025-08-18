@@ -7,13 +7,14 @@ import Cards from "../../UI/Cards/Tag/Cards.astro";
 /* console.log(listBusiness); */
 
 const res = await strapiFetch(
-  "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*",
+  "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&pagination[page]=1&pagination[pageSize]=12",
   {
     method: "GET",
   }
 );
 
 const listBusiness = res.data;
+//console.log(res);
 ---
 
 <section class="flex flex-col w-full py-6 gap-y-6">
