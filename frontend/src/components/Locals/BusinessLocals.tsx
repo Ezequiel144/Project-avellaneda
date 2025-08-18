@@ -3,6 +3,7 @@ import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
 import Cards from "../UI/Cards/Tag/Cards.astro";
 import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
+import { normalizeString } from "../../helpers/deleteAcent";
 
 export default function BusinessLocals() {
   const [isFilterCategory, seyIsFilterCategory] = useState<BusinessItemCard[]>(
@@ -48,17 +49,20 @@ export default function BusinessLocals() {
           // 1. Condición para el título de la categoría
           const isCategoryMatch = item.categories?.some(
             (subItem) =>
-              subItem.title.toLocaleLowerCase() === id.toLocaleLowerCase()
+              normalizeString(subItem.title.toLocaleLowerCase()) ===
+              normalizeString(id.toLocaleLowerCase())
           );
 
           // 2. Condición para la descripción
-          const isDescriptionMatch = item.shortdescription
-            ?.toLocaleLowerCase()
-            .includes(id.toLocaleLowerCase());
+          const isDescriptionMatch = normalizeString(
+            item.shortdescription?.toLocaleLowerCase()
+          ).includes(normalizeString(id.toLocaleLowerCase()));
 
           // 3. Condición para los tags
           const isTagMatch = item.tags?.some(
-            (tag) => tag.itemtag.toLocaleLowerCase() === id.toLocaleLowerCase()
+            (tag) =>
+              normalizeString(tag.itemtag.toLocaleLowerCase()) ===
+              normalizeString(id.toLocaleLowerCase())
           );
 
           // El item se mantiene si al menos una de las condiciones es verdadera
