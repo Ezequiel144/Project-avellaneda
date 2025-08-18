@@ -3,11 +3,14 @@ import { normalizeString } from "../../../helpers/deleteAcent";
 import type { BusinessItemCardMap } from "../../../interface/business";
 import { strapiFetch } from "../../../utils/fetch";
 import CardMapReact from "./CardMapReact";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function ContentCardMap() {
   const [isBusiness, setIsBusiness] = useState<BusinessItemCardMap[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchBusiness = async (id: string) => {
+    setLoading(true);
     const res = await strapiFetch(
       "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate[directions]=*",
       {
@@ -41,6 +44,7 @@ export default function ContentCardMap() {
       : fetchBusiness;
 
     setIsBusiness(filtered);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -54,6 +58,14 @@ export default function ContentCardMap() {
   }, []);
 
   //console.log(isBusiness);
+
+  if (loading) {
+    return (
+      <div className="w-full text-center flex flex-col gap-y-2 items-center">
+        <AiOutlineLoading3Quarters className="text-2xl animate-spin" />
+      </div>
+    );
+  }
 
   if (isBusiness.length === 0) {
     return (
