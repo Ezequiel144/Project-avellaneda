@@ -33,8 +33,6 @@ export default function BusinessLocals() {
         )
       : fetchBusiness;
 
-    console.log(filtered);
-
     seyIsFilterCategory(filtered);
     setLoading(false);
   };
@@ -49,7 +47,6 @@ export default function BusinessLocals() {
     );
     const fetchBusiness = res.data as BusinessItemCard[];
 
-    console.log(fetchBusiness);
     const filtered = id
       ? fetchBusiness.filter((item) => {
           // 1. Condición para el título de la categoría
@@ -125,7 +122,7 @@ export default function BusinessLocals() {
   }
 
   return (
-    <ul className="flex gap-5">
+    <ul className="flex gap-5 flex-wrap">
       {isFilterCategory.map((item) => (
         <ReactCardFilter
           key={item.id}
