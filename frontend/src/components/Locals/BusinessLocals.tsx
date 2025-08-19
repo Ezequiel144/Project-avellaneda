@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { IoIosAlert } from "react-icons/io";
+import { normalizeString } from "../../helpers/deleteAcent";
 import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
-import Cards from "../UI/Cards/Tag/Cards.astro";
 import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
-import { normalizeString } from "../../helpers/deleteAcent";
-import { IoIosAlert } from "react-icons/io";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function BusinessLocals() {
   const [isFilterCategory, seyIsFilterCategory] = useState<BusinessItemCard[]>(
@@ -16,7 +15,7 @@ export default function BusinessLocals() {
   const fetchAndFilter = async (id: string) => {
     setLoading(true);
     const res = await strapiFetch(
-      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=categories",
+      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=category",
       {
         method: "GET",
       }
@@ -27,14 +26,14 @@ export default function BusinessLocals() {
 
     const filtered = id
       ? fetchBusiness.filter((item) =>
-          item?.categories?.some(
+          item?.category?.some(
             (subItem) =>
               subItem.title.toLocaleLowerCase() === id.toLocaleLowerCase()
           )
         )
       : fetchBusiness;
 
-    //console.log(filtered);
+    console.log(filtered);
 
     seyIsFilterCategory(filtered);
     setLoading(false);
@@ -43,17 +42,18 @@ export default function BusinessLocals() {
   const fetchAndSearch = async (id: string) => {
     setLoading(true);
     const res = await strapiFetch(
-      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=categories",
+      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=category",
       {
         method: "GET",
       }
     );
     const fetchBusiness = res.data as BusinessItemCard[];
 
+    console.log(fetchBusiness);
     const filtered = id
       ? fetchBusiness.filter((item) => {
           // 1. Condición para el título de la categoría
-          const isCategoryMatch = item.categories?.some(
+          const isCategoryMatch = item.category?.some(
             (subItem) =>
               normalizeString(subItem.title.toLocaleLowerCase()) ===
               normalizeString(id.toLocaleLowerCase())
@@ -75,6 +75,7 @@ export default function BusinessLocals() {
           return isCategoryMatch || isDescriptionMatch || isTagMatch;
         })
       : fetchBusiness;
+
     seyIsFilterCategory(filtered);
     setLoading(false);
   };
