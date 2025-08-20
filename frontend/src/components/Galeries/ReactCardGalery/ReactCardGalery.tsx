@@ -29,7 +29,7 @@ export default function ReactCardGalery({
         )}
       </a>
       <div className="flex flex-col gap-y-2 max-w-[224px]">
-        <div className="p-2 flex flex-col gap-y-2">
+        <div className=" flex flex-col gap-y-2">
           <h3 className="font-semibold text-xl">{title}</h3>
           <ul className="flex flex-wrap gap-1">
             {tags.map((subItem, index) => (

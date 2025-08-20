@@ -57,12 +57,6 @@
       "relation": "oneToOne",
       "target": "api::galery.galery"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "business"
-    },
     "socialmedia": {
       "type": "component",
       "component": "shared.socialmedia",
@@ -77,6 +71,11 @@
       "type": "component",
       "component": "shared.linkbutton",
       "repeatable": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
     }
   }
 }

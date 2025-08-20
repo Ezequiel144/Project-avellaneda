@@ -33,8 +33,6 @@ export default function BusinessLocals() {
         )
       : fetchBusiness;
 
-    //console.log(filtered);
-
     seyIsFilterCategory(filtered);
     setLoading(false);
   };
@@ -74,6 +72,7 @@ export default function BusinessLocals() {
           return isCategoryMatch || isDescriptionMatch || isTagMatch;
         })
       : fetchBusiness;
+
     seyIsFilterCategory(filtered);
     setLoading(false);
   };
@@ -122,8 +121,10 @@ export default function BusinessLocals() {
     );
   }
 
+  console.log(isFilterCategory);
+
   return (
-    <ul className="flex gap-5">
+    <ul className="flex gap-5 flex-wrap">
       {isFilterCategory.map((item) => (
         <ReactCardFilter
           key={item.id}

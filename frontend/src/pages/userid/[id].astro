@@ -4,6 +4,7 @@ import PerfilUser from "../../components/UserId/PerfilUser/PerfilUser.astro";
 import type { BusinessItemUserId } from "../../interface/business";
 import Layout from "../../layouts/Layout.astro";
 import { strapiFetch } from "../../utils/fetch";
+import { marked } from "marked";
 
 /* const { URL_STRAPI } = envVariants(); */
 
@@ -55,7 +56,10 @@ const { currentBusiness } = Astro.props as {
         />
         <article class="mx-auto w-full max-w-[1200px] flex flex-col gap-y-9">
           <div class="w-full">
-            <p>{currentBusiness.longdescription}</p>
+            <div
+              class="long-description"
+              set:html={marked(currentBusiness.longdescription)}
+            />
           </div>
           <div class={`flex gap-4 w-full `}>
             {currentBusiness.linksbuttons.map((item) => (
@@ -74,3 +78,16 @@ const { currentBusiness } = Astro.props as {
     )
   }
 </Layout>
+
+<style>
+  .long-description {
+    font-size: 1rem;
+    list-style: circle;
+  }
+
+  .long-description ul li {
+    font-size: 1rem;
+    line-height: 1.5;
+    list-style: circle;
+  }
+</style>
