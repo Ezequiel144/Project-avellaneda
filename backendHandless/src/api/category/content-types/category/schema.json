@@ -19,12 +19,6 @@
       "maxLength": 50,
       "required": true
     },
-    "business": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::business.business",
-      "inversedBy": "categories"
-    },
     "types": {
       "type": "enumeration",
       "required": true,

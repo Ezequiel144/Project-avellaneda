@@ -3,17 +3,18 @@
 import type { Business, BusinessItemCard } from "../../../interface";
 import { strapiFetch } from "../../../utils/fetch";
 import Cards from "../../UI/Cards/Tag/Cards.astro";
+import ContentCardBusiness from "./ContentCard/ContentCardBusiness";
 
 /* console.log(listBusiness); */
 
-const res = await strapiFetch(
+/* const res = await strapiFetch(
   "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&pagination[page]=1&pagination[pageSize]=12",
   {
     method: "GET",
   }
 );
 
-const listBusiness = res.data;
+const listBusiness = res.data; */
 //console.log(res);
 ---
 
@@ -24,17 +25,20 @@ const listBusiness = res.data;
       Mira todos los locales que están registrados en nuestra web
     </p>
   </article>
-  <ul class="flex justify-between flex-wrap gap-5">
-    {
-      listBusiness.map((item: BusinessItemCard) => (
-        <Cards
-          imageLogo={item.imagelogo.url}
-          title={item.title}
-          tags={item.tags}
-          shortDescription={item.shortdescription}
-        />
-      ))
-    }
-  </ul>
-  <button> Ver locales </button>
+  <!-- <article class="flex flex-col gap-y-3">
+    <ul class="flex justify-between flex-wrap gap-5">
+      {
+        listBusiness.map((item: BusinessItemCard) => (
+          <Cards
+            imageLogo={item.imagelogo.url}
+            title={item.title}
+            tags={item.tags}
+            shortDescription={item.shortdescription}
+          />
+        ))
+      }
+    </ul>
+    <button> Ver locales </button>
+  </article> -->
+  <ContentCardBusiness client:idle />
 </section>
