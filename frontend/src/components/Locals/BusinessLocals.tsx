@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { IoIosAlert } from "react-icons/io";
+import { normalizeString } from "../../helpers/deleteAcent";
 import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
-import Cards from "../UI/Cards/Tag/Cards.astro";
 import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
-import { normalizeString } from "../../helpers/deleteAcent";
-import { IoIosAlert } from "react-icons/io";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function BusinessLocals() {
   const [isFilterCategory, seyIsFilterCategory] = useState<BusinessItemCard[]>(

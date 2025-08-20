@@ -1,4 +1,3 @@
-import envVariants from "../../../helpers/envVariants";
 import type { PropCardGalery } from "../../../interface";
 
 export default function ReactCardGalery({
@@ -7,7 +6,7 @@ export default function ReactCardGalery({
   tags,
   shortDescription,
 }: PropCardGalery) {
-  const { URL_STRAPI } = envVariants();
+  /* const { URL_STRAPI } = envVariants(); */
   return (
     <li className="w-fit max-h-[320px] rounded-xl overflow-hidden flex gap-5 border border-black/20 shadow-xl p-6">
       <a
@@ -16,7 +15,7 @@ export default function ReactCardGalery({
       >
         {imageLogo ? (
           <img
-            src={`${URL_STRAPI}${imageLogo.url}`}
+            src={`${imageLogo.url}`}
             className="size-full object-cover "
             alt={title}
             onError={(e) => {

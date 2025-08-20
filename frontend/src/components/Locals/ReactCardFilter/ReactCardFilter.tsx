@@ -1,4 +1,3 @@
-import envVariants from "../../../helpers/envVariants";
 import type { PropCard } from "../../../interface";
 
 export default function ReactCardFilter({
@@ -7,13 +6,13 @@ export default function ReactCardFilter({
   tags,
   shortDescription,
 }: PropCard) {
-  const { URL_STRAPI } = envVariants();
+  /* const { URL_STRAPI } = envVariants(); */
   return (
     <li className="w-[282px] h-fit rounded-xl overflow-hidden flex flex-col gap-y-2 border border-black/20 shadow-xl">
       <a className="w-full h-[220px]" href={`/userid/${title}`}>
         {imageLogo ? (
           <img
-            src={`${URL_STRAPI}${imageLogo}`}
+            src={`${imageLogo}`}
             className="size-full object-cover "
             alt=""
             onError={(e) => {

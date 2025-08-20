@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 //import listBusiness from "../../data/business.data.json";
 import type { BusinessItemCardGalery, GaleryItem } from "../../interface";
-import ReactCardGalery from "./ReactCardGalery/ReactCardGalery";
-import envVariants from "../../helpers/envVariants";
 import { strapiFetch } from "../../utils/fetch";
+import ReactCardGalery from "./ReactCardGalery/ReactCardGalery";
 
 export default function ModalGaleries({
   listGaleries,
@@ -15,7 +14,7 @@ export default function ModalGaleries({
   const [galery, setGalery] = useState<GaleryItem | null>(null);
   const [businessFiltered, setBusinessFiltered] = useState<any[]>([]);
 
-  const { URL_STRAPI } = envVariants();
+  //const { URL_STRAPI } = envVariants();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -64,7 +63,7 @@ export default function ModalGaleries({
       <div className="bg-white p-5 rounded-xl w-[964px] h-fit overflow-auto gap-y-5 flex flex-col">
         <div className="w-full h-[295px] rounded-lg overflow-hidden relative">
           <img
-            src={`${URL_STRAPI}${galery?.image?.url}`}
+            src={`${galery?.image?.url}`}
             className="size-full object-cover"
             alt="image-galery"
             onError={(e) => {

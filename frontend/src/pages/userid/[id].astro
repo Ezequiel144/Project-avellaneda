@@ -1,12 +1,11 @@
 ---
 import PerfilUser from "../../components/UserId/PerfilUser/PerfilUser.astro";
-import envVariants from "../../helpers/envVariants";
 //import listBusinesses from "../../data/business.data.json";
 import type { BusinessItemUserId } from "../../interface/business";
 import Layout from "../../layouts/Layout.astro";
 import { strapiFetch } from "../../utils/fetch";
 
-const { URL_STRAPI } = envVariants();
+/* const { URL_STRAPI } = envVariants(); */
 
 export async function getStaticPaths() {
   const res = await strapiFetch(
@@ -41,7 +40,7 @@ const { currentBusiness } = Astro.props as {
       <section class="size-full flex flex-col gap-y-9">
         <article class="h-[590px] w-full">
           <img
-            src={`${URL_STRAPI}${currentBusiness.frontpage.url}`}
+            src={`${currentBusiness.frontpage.url}`}
             alt="imagen-front"
             class="size-full object-cover -z-10"
             onerror="this.onerror=null; this.src='/image/no-image.png';"

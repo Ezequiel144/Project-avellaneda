@@ -1,9 +1,8 @@
 ---
 import { FaWarehouse } from "react-icons/fa";
-import envVariants from "../../../helpers/envVariants";
 import type {
-  PropsPerfilUser,
-  SocialMedia
+PropsPerfilUser,
+SocialMedia
 } from "../../../interface";
 import TagUserPerfil from "../../UI/Cards/Tag/TagUserPerfil.astro";
 import SocialMediaLink from "../SocialMedia/SocialMediaLink.astro";
@@ -11,14 +10,14 @@ import SocialMediaLink from "../SocialMedia/SocialMediaLink.astro";
 const { imageLogo, title, tags, socialMedia, galery } =
   Astro.props as PropsPerfilUser;
 
-const { URL_STRAPI } = envVariants();
+/* const { URL_STRAPI } = envVariants(); */
 ---
 
 <article class="w-full max-w-[1200px] mx-auto -mt-52 flex gap-x-6">
   <div class="overflow-hidden rounded-lg size-[282px]">
     <img
       class="size-full object-cover"
-      src={`${URL_STRAPI}${imageLogo}`}
+      src={`${imageLogo}`}
       alt="image-perfil-logo"
       onerror="this.onerror=null; this.src='/image/no-image.png';"
     />
