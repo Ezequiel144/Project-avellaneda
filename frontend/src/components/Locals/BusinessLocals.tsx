@@ -15,7 +15,7 @@ export default function BusinessLocals() {
   const fetchAndFilter = async (id: string) => {
     setLoading(true);
     const res = await strapiFetch(
-      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=categories",
+      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=category",
       {
         method: "GET",
       }
@@ -26,7 +26,7 @@ export default function BusinessLocals() {
 
     const filtered = id
       ? fetchBusiness.filter((item) =>
-          item?.categories?.some(
+          item?.category?.some(
             (subItem) =>
               subItem.title.toLocaleLowerCase() === id.toLocaleLowerCase()
           )
@@ -42,7 +42,7 @@ export default function BusinessLocals() {
   const fetchAndSearch = async (id: string) => {
     setLoading(true);
     const res = await strapiFetch(
-      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=categories",
+      "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=category",
       {
         method: "GET",
       }
@@ -52,7 +52,7 @@ export default function BusinessLocals() {
     const filtered = id
       ? fetchBusiness.filter((item) => {
           // 1. Condición para el título de la categoría
-          const isCategoryMatch = item.categories?.some(
+          const isCategoryMatch = item.category?.some(
             (subItem) =>
               normalizeString(subItem.title.toLocaleLowerCase()) ===
               normalizeString(id.toLocaleLowerCase())

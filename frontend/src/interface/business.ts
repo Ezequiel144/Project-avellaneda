@@ -88,7 +88,8 @@ export interface BusinessItemCard {
   tags: { itemtag: string }[];
   shortdescription: string;
   imagelogo: { url: string };
-  categories?: Category[];
+  //categories?: Category[];
+  category?: Category[];
 }
 
 export interface BusinessItemCardMap extends BusinessItemCard {

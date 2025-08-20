@@ -1,11 +1,10 @@
 ---
-import envVariants from "../../helpers/envVariants";
 import type { GaleryItem } from "../../interface/business";
 import ButtonCards from "../UI/Buttons/ButtonCards.astro";
 
 const { title, direction, image, id } = Astro.props as GaleryItem;
 
-const { URL_STRAPI } = envVariants();
+/* const { URL_STRAPI } = envVariants(); */
 ---
 
 <li
@@ -27,9 +26,9 @@ const { URL_STRAPI } = envVariants();
     </div>
     <div class="size-20 rounded-sm overflow-hidden">
       <img
-        src={`${URL_STRAPI}${image?.url}`}
+        src={`${image?.url}`}
         alt=""
-        class="size-full"
+        class="size-full object-cover"
         onerror="this.onerror=null; this.src='/image/no-image.png';"
       />
     </div>

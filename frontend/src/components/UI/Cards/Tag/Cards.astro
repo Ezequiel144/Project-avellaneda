@@ -1,10 +1,9 @@
 ---
+import type { PropCard } from "../../../../interface/props";
 import ButtonCards from "../../Buttons/ButtonCards.astro";
 import Tag from "./Tag.astro";
-import envVariants from "../../../../helpers/envVariants";
-import type { PropCard } from "../../../../interface/props";
 
-const { URL_STRAPI } = envVariants();
+/* const { URL_STRAPI } = envVariants(); */
 
 const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
 ---
@@ -16,7 +15,7 @@ const { imageLogo, title, tags, shortDescription } = Astro.props as PropCard;
     {
       imageLogo ? (
         <img
-          src={`${URL_STRAPI}${imageLogo}`}
+          src={`${imageLogo}`}
           class="size-full object-cover "
           alt=""
           onerror="this.onerror=null; this.src='/image/no-image.png';"
