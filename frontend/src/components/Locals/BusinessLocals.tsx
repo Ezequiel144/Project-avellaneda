@@ -121,6 +121,8 @@ export default function BusinessLocals() {
     );
   }
 
+  console.log(isFilterCategory);
+
   return (
     <ul className="flex gap-5 flex-wrap">
       {isFilterCategory.map((item) => (
