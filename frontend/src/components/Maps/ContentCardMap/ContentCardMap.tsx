@@ -76,7 +76,7 @@ export default function ContentCardMap() {
   return (
     <ul
       id="business-list"
-      className="flex gap-x-3 overflow-auto w-full max-w-[1200px]"
+      className="flex gap-x-3 overflow-auto w-full max-w-[1200px] z-10"
     >
       {isBusiness.map((item) => (
         <CardMapReact
