@@ -1,4 +1,3 @@
-import envVariants from "../../../helpers/envVariants";
 import type { PropCardMap } from "../../../interface";
 
 export default function CardMapReact({
@@ -8,7 +7,7 @@ export default function CardMapReact({
   imageLogo,
   direction,
 }: PropCardMap) {
-  const { URL_STRAPI } = envVariants();
+  //const { URL_STRAPI } = envVariants();
 
   const fullAddress = `${direction.street} ${direction.number.toString()}, ${
     direction.locality
@@ -26,7 +25,7 @@ export default function CardMapReact({
         <div className="size-[180px] rounded-lg overflow-hidden">
           {imageLogo ? (
             <img
-              src={`${URL_STRAPI}${imageLogo}`}
+              src={`${imageLogo}`}
               className="size-full object-cover"
               alt={`image-${title}`}
               onError={(e) => {

@@ -1,4 +1,3 @@
-import envVariants from "../../../helpers/envVariants";
 import type { PropCardGalery } from "../../../interface";
 
 export default function ReactCardGalery({
@@ -7,16 +6,16 @@ export default function ReactCardGalery({
   tags,
   shortDescription,
 }: PropCardGalery) {
-  const { URL_STRAPI } = envVariants();
+  /* const { URL_STRAPI } = envVariants(); */
   return (
-    <li className="w-fit max-h-[320px] rounded-xl overflow-hidden flex gap-5 border border-black/20 shadow-xl p-6">
+    <li className="w-full sm:w-fit h-fit sm:max-h-[320px] rounded-xl overflow-hidden flex flex-row gap-5 border border-black/20 shadow-xl p-6 mb-3 sm:mb-0">
       <a
-        className="size-[180px] rounded-lg overflow-hidden"
+        className="size-[100px] sm:size-[180px] rounded-lg overflow-hidden"
         href={`/userid/${title}`}
       >
         {imageLogo ? (
           <img
-            src={`${URL_STRAPI}${imageLogo.url}`}
+            src={`${imageLogo.url}`}
             className="size-full object-cover "
             alt={title}
             onError={(e) => {
@@ -29,10 +28,10 @@ export default function ReactCardGalery({
           <div className="size-full bg-gray-300" />
         )}
       </a>
-      <div className="flex flex-col gap-y-2 max-w-[224px]">
+      <div className="flex flex-col gap-y-2 w-full sm:max-w-[224px]">
         <div className=" flex flex-col gap-y-2">
           <h3 className="font-semibold text-xl">{title}</h3>
-          <ul className="flex flex-wrap gap-1">
+          <ul className="flex flex-wrap gap-1 overflow-auto w-full">
             {tags.map((subItem, index) => (
               <li
                 key={index}
@@ -46,7 +45,7 @@ export default function ReactCardGalery({
         </div>
         <a
           href={`/userid/${title}`}
-          className="w-full py-4 bg-red-500 text-white text-base font-semibold text-center rounded-xl px-4"
+          className="w-full py-4 hidden sm:block bg-red-500 text-white text-base font-semibold text-center rounded-xl px-4"
         >
           Ver más
         </a>

@@ -37,7 +37,7 @@ export default function ContentCardBusiness() {
 
   return (
     <article className="flex flex-col gap-y-3 w-full items-center">
-      <ul className="flex justify-between flex-wrap gap-5 w-full">
+      <ul className="justify-start grid grid-cols-[repeat(auto-fit,minmax(282px,1fr))] gap-5 w-full">
         {isBusiness.map((item: BusinessItemCard) => (
           <CardBusiness
             key={item.id}
@@ -49,7 +49,7 @@ export default function ContentCardBusiness() {
         ))}
       </ul>
       <button
-        className="bg-red-500 text-white rounded-xl py-3 px-8 text-xl cursor-pointer w-fit font-semibold"
+        className="bg-red-500 text-white rounded-xl py-3 px-8 text-xl cursor-pointer w-full md:w-fit font-semibold"
         onClick={() => setIsPageSize((prev) => prev + 8)}
       >
         {" "}

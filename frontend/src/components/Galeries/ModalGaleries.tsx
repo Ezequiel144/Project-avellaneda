@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 //import listBusiness from "../../data/business.data.json";
 import type { BusinessItemCardGalery, GaleryItem } from "../../interface";
-import ReactCardGalery from "./ReactCardGalery/ReactCardGalery";
-import envVariants from "../../helpers/envVariants";
 import { strapiFetch } from "../../utils/fetch";
+import ReactCardGalery from "./ReactCardGalery/ReactCardGalery";
 
 export default function ModalGaleries({
   listGaleries,
@@ -15,7 +14,7 @@ export default function ModalGaleries({
   const [galery, setGalery] = useState<GaleryItem | null>(null);
   const [businessFiltered, setBusinessFiltered] = useState<any[]>([]);
 
-  const { URL_STRAPI } = envVariants();
+  //const { URL_STRAPI } = envVariants();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -60,11 +59,11 @@ export default function ModalGaleries({
   }
 
   return (
-    <div className="size-full z-10 bg-black/30 backdrop-blur-lg fixed top-0 left-0 flex items-center justify-center ">
-      <div className="bg-white p-5 rounded-xl w-[964px] h-fit overflow-auto gap-y-5 flex flex-col">
+    <div className="size-full z-20 bg-black/30 backdrop-blur-lg fixed top-0 left-0 flex items-center justify-center ">
+      <div className="bg-white p-5 rounded-xl w-full md:w-[964px] h-fit max-h-[90%]  gap-y-5 flex flex-col">
         <div className="w-full h-[295px] rounded-lg overflow-hidden relative">
           <img
-            src={`${URL_STRAPI}${galery?.image?.url}`}
+            src={`${galery?.image?.url}`}
             className="size-full object-cover"
             alt="image-galery"
             onError={(e) => {
@@ -80,7 +79,7 @@ export default function ModalGaleries({
             <AiOutlineClose className="text-xl" />
           </a>
         </div>
-        <h2 className="text-3xl font-semibold">{galery?.title}</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold">{galery?.title}</h2>
         <p className="text-base font-normal text-[#A3A3A3] capitalize">
           {galery?.direction.country}, {galery?.direction.province},{" "}
           {galery?.direction.locality}, {galery?.direction.postalcode},{" "}
@@ -94,7 +93,7 @@ export default function ModalGaleries({
         >
           Ver en mapa
         </a>
-        <ul className="grid grid-cols-2 overflow-auto gap-4 max-h-[300px] pb-6">
+        <ul className=" md:grid sm:grid-cols-2 overflow-auto gap-4 h-fit max-h-[200px] md:max-h-[300px] pb-6">
           {businessFiltered.map((item) => (
             <ReactCardGalery
               key={item.id}
