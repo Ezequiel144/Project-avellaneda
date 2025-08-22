@@ -23,9 +23,9 @@ export default function Search() {
           Buscar
         </a>
       </article>
-      <button className="px-8 py-4 h-full bg-red-500 rounded-lg text-base sm:text-xl font-semibold cursor-pointer flex items-center justify-center gap-x-2">
+      <a href="/maps" className="px-8 py-4 h-full bg-red-500 rounded-lg text-base sm:text-xl font-semibold cursor-pointer flex items-center justify-center gap-x-2">
         <BiSolidMap className="text-xl sm:text-2xl" /> Ver locales en mapa
-      </button>
+      </a>
     </div>
   );
 }
