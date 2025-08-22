@@ -124,7 +124,7 @@ export default function BusinessLocals() {
   /* console.log(isFilterCategory); */
 
   return (
-    <ul className="flex gap-5 flex-wrap">
+    <ul className="gap-5 grid grid-cols-[repeat(auto-fit,minmax(282px,1fr))]">
       {isFilterCategory.map((item) => (
         <ReactCardFilter
           key={item.id}

@@ -27,16 +27,16 @@ export default function ButtonCategories({
   };
 
   return (
-    <li className="flex flex-col gap-y-2">
+    <li className="flex flex-col gap-y-2 h-fit w-full">
       <span className="font-semibold text-xl">{item}</span>
-      <ul className="flex gap-2">
+      <ul className="flex gap-x-2 gap-y-5 flex-wrap ">
         {filterCategories(item).map((subItem: Category) => (
-          <li key={subItem.id} className="w-fit">
+          <li key={subItem.id} className="size-fit">
             <a
               className={`bg-red-white text-red-500 border border-red-500 rounded-lg py-2 px-3 size-fit capitalize ${
                 isValueCate === subItem.title.toLocaleLowerCase()
                   ? "text-white bg-red-500 "
-                  : "text-red-500 border border-red-500"
+                  : "text-red-500 border border-red-500 size-fit"
               }`}
               href={`/locals?c=${subItem.title}`}
               onClick={() => {

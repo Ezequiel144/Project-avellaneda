@@ -8,7 +8,7 @@ export default function ReactCardFilter({
 }: PropCard) {
   /* const { URL_STRAPI } = envVariants(); */
   return (
-    <li className="w-[282px] h-fit rounded-xl overflow-hidden flex flex-col gap-y-2 border border-black/20 shadow-xl">
+    <li className="w-full lg:w-[282px] h-fit rounded-xl overflow-hidden flex flex-col gap-y-2 border border-black/20 shadow-xl">
       <a className="w-full h-[220px]" href={`/userid/${title}`}>
         {imageLogo ? (
           <img
