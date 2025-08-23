@@ -1,10 +1,10 @@
 ---
+import DescriptionMarkdown from "../../components/UserId/DescriptionMarkdown/DescriptionMarkdown.astro";
 import PerfilUser from "../../components/UserId/PerfilUser/PerfilUser.astro";
 //import listBusinesses from "../../data/business.data.json";
 import type { BusinessItemUserId } from "../../interface/business";
 import Layout from "../../layouts/Layout.astro";
 import { strapiFetch } from "../../utils/fetch";
-import { marked } from "marked";
 
 /* const { URL_STRAPI } = envVariants(); */
 
@@ -71,19 +71,22 @@ const currentBusiness = await current();
           galery={currentBusiness.galery || undefined}
         />
         <article class="mx-auto w-full max-w-[1200px] flex flex-col gap-y-9 px-3 xl:px-0 ">
-          <div class="w-full">
+          {/* <div class="w-full">
             <div
               class="long-description"
               set:html={marked(currentBusiness.longdescription)}
             />
-          </div>
+          </div> */}
+          <DescriptionMarkdown
+            longdescription={currentBusiness.longdescription}
+          />
           <div
             class={`gap-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]`}
           >
             {currentBusiness.linksbuttons.map((item) => (
               <a
                 href={item.link}
-                class={` rounded-xl bg-red-500 text-white text-center px-4 py-3 text-xl font-semibold`}
+                class={` rounded-xl border border-red-500 text-red-500 text-center px-4 py-3 text-base md:text-xl font-semibold`}
               >
                 {item.title}
               </a>
@@ -96,16 +99,3 @@ const currentBusiness = await current();
     )
   }
 </Layout>
-
-<style>
-  .long-description {
-    font-size: 1rem;
-    list-style: circle;
-  }
-
-  .long-description ul li {
-    font-size: 1rem;
-    line-height: 1.5;
-    list-style: circle;
-  }
-</style>
