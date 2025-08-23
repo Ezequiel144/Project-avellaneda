@@ -12,7 +12,9 @@ export default function ModalGaleries({
 }) {
   const [modalId, setModalId] = useState<string | null>(null);
   const [galery, setGalery] = useState<GaleryItem | null>(null);
-  const [businessFiltered, setBusinessFiltered] = useState<any[]>([]);
+  const [businessFiltered, setBusinessFiltered] = useState<
+    BusinessItemCardGalery[]
+  >([]);
 
   //const { URL_STRAPI } = envVariants();
 
@@ -86,24 +88,36 @@ export default function ModalGaleries({
           {galery?.direction.street} {galery?.direction.number}
         </p>
         <a
-          href="#"
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            galery?.direction.street +
+              " " +
+              galery?.direction.number +
+              ", " +
+              galery?.direction.locality +
+              ", " +
+              galery?.direction.province +
+              ", " +
+              galery?.direction.country
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-4 bg-red-500 text-white text-xl font-semibold text-center rounded-xl"
+          className="w-full py-4 bg-red-500 text-white text-base md:text-xl font-semibold text-center rounded-xl"
         >
           Ver en mapa
         </a>
-        <ul className=" md:grid sm:grid-cols-2 overflow-auto gap-4 h-fit max-h-[200px] md:max-h-[300px] pb-6">
-          {businessFiltered.map((item) => (
-            <ReactCardGalery
-              key={item.id}
-              imageLogo={item.imagelogo}
-              title={item.title}
-              tags={item.tags}
-              shortDescription={item.shortdescription}
-            />
-          ))}
-        </ul>
+        {businessFiltered.length !== 0 && (
+          <ul className=" md:grid sm:grid-cols-2 overflow-auto gap-4 h-fit max-h-[200px] md:max-h-[300px] pb-6">
+            {businessFiltered.map((item) => (
+              <ReactCardGalery
+                key={item.id}
+                imageLogo={item.imagelogo}
+                title={item.title}
+                tags={item.tags}
+                shortDescription={item.shortdescription}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

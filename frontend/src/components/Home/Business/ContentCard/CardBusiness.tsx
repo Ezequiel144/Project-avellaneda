@@ -41,7 +41,7 @@ export default function ({
       </div>
       <a
         href={`/userid/${title}`}
-        className="w-full py-4 bg-red-500 text-white text-xl font-semibold text-center rounded-xl"
+        className="w-full py-4 bg-red-500 text-white text-base md:text-xl font-semibold text-center"
       >
         Ver local
       </a>
