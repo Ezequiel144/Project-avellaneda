@@ -31,7 +31,17 @@ export default function ReactCardFilter({
           {tags.map((subItem, index) => (
             <li
               key={index}
-              className="w-fit text-sm px-2 py-1 rounded-md bg-blue-500/10 text-blue-500/80 capitalize"
+              className={`w-fit text-sm px-2 py-1 rounded-md ${
+                (index + 1) % 2 === 0 && (index + 1) % 4 !== 0
+                  ? "bg-sky-500/10 text-sky-500/80"
+                  : (index + 1) % 3 === 0
+                  ? "bg-fuchsia-500/10 text-fuchsia-500/80"
+                  : (index + 1) % 4 === 0
+                  ? "bg-amber-500/10  text-amber-500/80"
+                  : (index + 1) % 5 === 0
+                  ? "bg-emerald-500/10 text-emerald-500/80"
+                  : "bg-blue-500/10 text-blue-500/80"
+              } capitalize`}
             >
               {subItem.itemtag}
             </li>
