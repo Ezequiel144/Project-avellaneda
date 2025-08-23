@@ -8,7 +8,7 @@ import { marked } from "marked";
 
 /* const { URL_STRAPI } = envVariants(); */
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const res = await strapiFetch(
     "/businesses?populate[imagelogo][fields][0]=url&populate=galery&populate[frontpage][fields][0]=url&populate[tags]=*&populate[linksbuttons]=*&populate[socialmedia]=*",
     {
@@ -16,18 +16,34 @@ export async function getStaticPaths() {
     }
   );
   const listBusinesses = res.data;
-  //console.log(listBusinesses);
   return listBusinesses.map((item: BusinessItemUserId) => {
     return {
       params: { id: item.title },
       props: { currentBusiness: item },
     };
   });
-}
+} */
 
-const { currentBusiness } = Astro.props as {
-  currentBusiness: BusinessItemUserId;
+const { id } = Astro.params;
+
+const current = async () => {
+  const res = await strapiFetch(
+    "/businesses?populate[imagelogo][fields][0]=url&populate=galery&populate[frontpage][fields][0]=url&populate[tags]=*&populate[linksbuttons]=*&populate[socialmedia]=*",
+    {
+      method: "GET",
+    }
+  );
+  const listBusinesses = res.data as BusinessItemUserId[];
+  const findBusine = listBusinesses.find((item) => item.title === id);
+  //console.log(findBusine)
+  return findBusine;
 };
+
+const currentBusiness = await current();
+
+/* const { currentBusiness } = Astro.props as {
+  currentBusiness: BusinessItemUserId;
+}; */
 /* const currentBusiness = listBusinesses
   ? listBusinesses.find((item: Business) => item.id === _id)
   : null; */
@@ -61,7 +77,9 @@ const { currentBusiness } = Astro.props as {
               set:html={marked(currentBusiness.longdescription)}
             />
           </div>
-          <div class={`gap-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]`}>
+          <div
+            class={`gap-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]`}
+          >
             {currentBusiness.linksbuttons.map((item) => (
               <a
                 href={item.link}

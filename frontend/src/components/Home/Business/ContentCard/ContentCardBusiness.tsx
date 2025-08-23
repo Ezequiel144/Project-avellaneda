@@ -48,13 +48,15 @@ export default function ContentCardBusiness() {
           />
         ))}
       </ul>
-      <button
-        className="bg-red-500 text-white rounded-xl py-3 px-8 text-xl cursor-pointer w-full md:w-fit font-semibold"
-        onClick={() => setIsPageSize((prev) => prev + 8)}
-      >
-        {" "}
-        Ver + locales{" "}
-      </button>
+      {isBusiness.length % 8 === 0 && (
+        <button
+          className="bg-red-500 text-white rounded-xl py-3 px-8 text-base md:text-xl cursor-pointer w-full md:w-fit font-semibold"
+          onClick={() => setIsPageSize((prev) => prev + 8)}
+        >
+          {" "}
+          Ver + locales{" "}
+        </button>
+      )}
     </article>
   );
 }
