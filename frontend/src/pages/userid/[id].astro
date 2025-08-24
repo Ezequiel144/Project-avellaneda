@@ -53,8 +53,8 @@ const currentBusiness = await current();
 <Layout>
   {
     currentBusiness ? (
-      <section class="size-full flex flex-col gap-y-9">
-        <article class=" h-full max-h-[590px] w-full ">
+      <section class="size-full flex flex-col gap-y-9 h-fit">
+        <article class=" h-[400px] md:h-[590px] w-full ">
           <img
             src={`${currentBusiness.frontpage.url}`}
             alt="imagen-front"
