@@ -116,6 +116,7 @@ export default function ModalGaleries({
               {businessFiltered.map((item) => (
                 <ReactCardGalery
                   key={item.id}
+                  id={item.id}
                   imageLogo={item.imagelogo}
                   title={item.title}
                   tags={item.tags}

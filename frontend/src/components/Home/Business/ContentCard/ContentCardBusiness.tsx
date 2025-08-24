@@ -41,6 +41,7 @@ export default function ContentCardBusiness() {
         {isBusiness.map((item: BusinessItemCard) => (
           <CardBusiness
             key={item.id}
+            id={item.id}
             imageLogo={item.imagelogo.url}
             title={item.title}
             tags={item.tags}

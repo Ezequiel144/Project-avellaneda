@@ -1,6 +1,7 @@
 import type { PropCardMap } from "../../../interface";
 
 export default function CardMapReact({
+  id,
   title,
   tags,
   shortDescription,
@@ -21,7 +22,7 @@ export default function CardMapReact({
 
   return (
     <li className="bg-white rounded-xl w-fit h-fit shadow-lg flex gap-x-6 p-3">
-      <a className="" href={`/userid/${title}`}>
+      <a className="" href={`/userid/${id}`}>
         <div className="size-[180px] rounded-lg overflow-hidden">
           {imageLogo ? (
             <img

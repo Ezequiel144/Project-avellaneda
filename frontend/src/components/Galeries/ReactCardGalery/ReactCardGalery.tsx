@@ -1,6 +1,7 @@
 import type { PropCardGalery } from "../../../interface";
 
 export default function ReactCardGalery({
+  id,
   title,
   imageLogo,
   tags,
@@ -11,7 +12,7 @@ export default function ReactCardGalery({
     <li className="w-full sm:w-fit h-fit sm:max-h-[320px] rounded-xl overflow-hidden flex flex-row gap-5 border border-black/20 shadow-xl p-6 mb-3 sm:mb-0">
       <a
         className="size-[100px] sm:size-[180px] rounded-lg overflow-hidden"
-        href={`/userid/${title}`}
+        href={`/userid/${id}`}
       >
         {imageLogo ? (
           <img
@@ -54,7 +55,7 @@ export default function ReactCardGalery({
           <p className="text-sm">{shortDescription}</p>
         </div>
         <a
-          href={`/userid/${title}`}
+          href={`/userid/${id}`}
           className="w-full py-4 hidden sm:block bg-red-500 text-white text-base font-semibold text-center rounded-xl px-4"
         >
           Ver más

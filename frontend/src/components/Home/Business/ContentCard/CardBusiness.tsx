@@ -1,6 +1,7 @@
 import type { PropCard } from "../../../../interface";
 
 export default function ({
+  id,
   imageLogo,
   title,
   tags,
@@ -9,7 +10,7 @@ export default function ({
   /* const { URL_STRAPI } = envVariants(); */
   return (
     <li className="w-full lg:w-[282px] h-fit rounded-xl overflow-hidden flex flex-col gap-y-2 border border-black/20 shadow-xl">
-      <a className="w-full h-[220px]" href={`/userid/${title}`}>
+      <a className="w-full h-[220px]" href={`/userid/${id}`}>
         {imageLogo ? (
           <img
             src={`${imageLogo}`}
@@ -50,7 +51,7 @@ export default function ({
         <p>{shortDescription}</p>
       </div>
       <a
-        href={`/userid/${title}`}
+        href={`/userid/${id}`}
         className="w-full py-4 bg-red-500 text-white text-base md:text-xl font-semibold text-center"
       >
         Ver local

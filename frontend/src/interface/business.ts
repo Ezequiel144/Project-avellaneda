@@ -83,7 +83,7 @@ export interface Business {
 }
 
 export interface BusinessItemCard {
-  id: string;
+  id: number;
   title: string;
   tags: { itemtag: string }[];
   shortdescription: string;

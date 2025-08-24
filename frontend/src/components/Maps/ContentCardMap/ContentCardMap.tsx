@@ -81,6 +81,7 @@ export default function ContentCardMap() {
       {isBusiness.map((item) => (
         <CardMapReact
           key={item.id}
+          id={item.id}
           title={item.title}
           tags={item.tags}
           shortDescription={item.shortdescription}

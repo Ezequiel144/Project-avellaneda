@@ -128,6 +128,7 @@ export default function BusinessLocals() {
       {isFilterCategory.map((item) => (
         <ReactCardFilter
           key={item.id}
+          id={item.id}
           imageLogo={item.imagelogo.url}
           title={item.title}
           tags={item.tags}

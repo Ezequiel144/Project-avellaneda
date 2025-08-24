@@ -34,8 +34,7 @@ const current = async () => {
     }
   );
   const listBusinesses = res.data as BusinessItemUserId[];
-  const findBusine = listBusinesses.find((item) => item.title === id);
-  //console.log(findBusine)
+  const findBusine = listBusinesses.find((item) => item.id.toString() === id);
   return findBusine;
 };
 
