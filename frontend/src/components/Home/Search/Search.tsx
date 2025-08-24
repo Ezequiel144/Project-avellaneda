@@ -9,8 +9,8 @@ export default function Search() {
       <article className="flex flex-col sm:flex-row items-center gap-4 w-full">
         <input
           type="search"
-          className="bg-[#B3B3B3]/50 px-4 py-4 rounded-lg w-full"
-          placeholder="Que vas a comprar"
+          className="bg-[#B3B3B3]/80 px-4 py-4 rounded-lg w-full"
+          placeholder="Que vas a comprar: Ropa, comida, ect"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setIsValueSearch(e.target.value);
           }}
@@ -23,7 +23,10 @@ export default function Search() {
           Buscar
         </a>
       </article>
-      <a href="/maps" className="px-8 py-4 h-full bg-red-500 rounded-lg text-base sm:text-xl font-semibold cursor-pointer flex items-center justify-center gap-x-2">
+      <a
+        href="/maps"
+        className="px-8 py-4 h-full bg-red-500 rounded-lg text-base sm:text-xl font-semibold cursor-pointer flex items-center justify-center gap-x-2"
+      >
         <BiSolidMap className="text-xl sm:text-2xl" /> Ver locales en mapa
       </a>
     </div>

@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/UI/Footer/Footer.astro";
 import Navbar from "../components/UI/Navbar/Navbar.astro";
 import "../styles/global.css";
 // Supports weights 100-900
@@ -15,9 +16,10 @@ import { ClientRouter } from "astro:transitions";
     <title>Proyecto avellaneda</title>
   </head>
 
-  <body >
+  <body>
     <Navbar />
     <slot />
+    <Footer />
   </body>
   <ClientRouter />
   <style>
@@ -25,7 +27,7 @@ import { ClientRouter } from "astro:transitions";
     body {
       margin: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       font-family: "Montserrat Variable", sans-serif;
       position: relative;
     }
