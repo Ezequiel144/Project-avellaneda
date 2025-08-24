@@ -95,7 +95,9 @@ const currentBusiness = await current();
         </article>
       </section>
     ) : (
-      <h1>Business not found</h1>
+      <section class="size-full flex flex-col items-center justify-center">
+        <h2 class="text-2xl font-bold text-red-500">Business not found</h2>
+      </section>
     )
   }
 </Layout>
