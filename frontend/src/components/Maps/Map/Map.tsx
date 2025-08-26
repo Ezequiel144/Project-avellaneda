@@ -18,7 +18,7 @@ export default function Map({ addressQuery }: any) {
       title="Mapa"
       src={src}
       //width="100%"
-      className="w-full h-[60%] md:h-full"
+      className="w-full h-[600px] md:h-screen"
       //height="100%"
       style={{ border: 0 }}
       loading="lazy"

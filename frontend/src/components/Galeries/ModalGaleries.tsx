@@ -66,7 +66,11 @@ export default function ModalGaleries({
   return (
     <div className="size-full z-20 bg-black/30 backdrop-blur-lg fixed top-0 left-0 flex items-center justify-center ">
       {!isLoading ? (
-        <div className="bg-white p-5 rounded-xl w-full md:w-[964px] h-fit max-h-[90%] gap-y-5 flex flex-col">
+        <div
+          className={`bg-white p-5 rounded-xl w-full md:w-[964px] ${
+            businessFiltered.length !== 0 ? "h-full" : "h-fit"
+          }  sm:h-fit gap-y-5 flex flex-col`}
+        >
           <div className="w-full h-[295px] rounded-lg overflow-hidden relative">
             <img
               src={`${galery?.image?.url}`}
@@ -112,7 +116,7 @@ export default function ModalGaleries({
             Ver en mapa
           </a>
           {businessFiltered.length !== 0 && (
-            <ul className=" md:grid sm:grid-cols-2 overflow-auto gap-4 h-fit max-h-[200px] md:max-h-[300px] pb-6">
+            <ul className=" md:grid sm:grid-cols-2 overflow-auto gap-4 h-full sm:max-h-[200px] md:max-h-[300px] pb-6">
               {businessFiltered.map((item) => (
                 <ReactCardGalery
                   key={item.id}
