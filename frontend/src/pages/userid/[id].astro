@@ -48,9 +48,17 @@ const currentBusiness = await current();
   : null; */
 
 //console.log(currentBusiness ? currentBusiness : "Business not found");
+
+const pageTitle = `${currentBusiness?.title} | Informes Avellaneda`;
+const pageDescription = currentBusiness?.shortdescription;
+const openGraphImage = currentBusiness?.imagelogo.url;
 ---
 
-<Layout>
+<Layout
+  title={pageTitle}
+  description={pageDescription || ""}
+  ogImage={openGraphImage}
+>
   {
     currentBusiness ? (
       <section class="size-full flex flex-col gap-y-9 h-fit">

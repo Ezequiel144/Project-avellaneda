@@ -5,15 +5,34 @@ import "../styles/global.css";
 // Supports weights 100-900
 import "@fontsource-variable/montserrat";
 import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string; // Propiedad opcional para la imagen de Open Graph
+}
+
+const { title, description, ogImage } = Astro.props;
+
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/svg/favincon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Proyecto avellaneda</title>
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:url" content={Astro.url.href} />
+
+    <title>{title}</title>
   </head>
 
   <body>
