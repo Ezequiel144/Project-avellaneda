@@ -2,6 +2,10 @@
 import { marked } from "marked";
 
 const { longdescription } = Astro.props;
+
+marked.setOptions({
+  breaks: true,
+});
 ---
 
 <div class="w-full">
@@ -24,8 +28,8 @@ const { longdescription } = Astro.props;
     list-style-type: decimal;
   }
 
-  .long-description a{
-    color:red;
+  .long-description a {
+    color: red;
     padding: 4px 8px;
     border: 1px solid red;
     border-radius: 8px;

@@ -9,7 +9,7 @@ export default function ReactCardGalery({
 }: PropCardGalery) {
   /* const { URL_STRAPI } = envVariants(); */
   return (
-    <li className="w-full sm:w-fit h-fit sm:max-h-[320px] rounded-xl overflow-hidden flex flex-row gap-5 border border-black/20 shadow-xl p-6 mb-3 sm:mb-0">
+    <li className="w-full sm:w-fit h-fit rounded-xl overflow-hidden flex flex-row gap-5 border border-black/20 shadow-xl p-6 mb-3 sm:mb-0">
       <a
         className="size-[100px] sm:size-[180px] rounded-lg overflow-hidden"
         href={`/userid/${id}`}

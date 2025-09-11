@@ -25,7 +25,9 @@ export default function SearchMap() {
         type="search"
         className="w-full p-3 bg-[#B3B3B3]/70 rounded-xl"
         placeholder="Que vas a buscar ?"
-        onChange={(e: any) => setIsValueInput(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setIsValueInput(e.target.value)
+        }
         value={isValueInput}
       />
       <a

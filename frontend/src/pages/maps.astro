@@ -1,22 +1,19 @@
 ---
 import Map from "../components/Maps/Map/Map";
 import SearchMap from "../components/Maps/SearchMap/SearchMap";
-import { normalizeString } from "../helpers/deleteAcent";
 //import listBusiness from "../data/business.data.json";
 import ContentCardMap from "../components/Maps/ContentCardMap/ContentCardMap";
-import type { BusinessItemCardMap } from "../interface";
 import Layout from "../layouts/Layout.astro";
-import { strapiFetch } from "../utils/fetch";
 
 const addressQuery = Astro.url.searchParams.get("q");
-const getQuerySearch = Astro.url.searchParams.get("s");
-
+//const getQuerySearch = Astro.url.searchParams.get("s");
+/* 
 const res = await strapiFetch(
   "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate[directions]=*",
   {
     method: "GET",
   }
-);
+); */
 /* const listBusiness = getQuerySearch
   ? res.data.filter((item: BusinessItemCardMap) => {
       //1.Condicion para el titulo

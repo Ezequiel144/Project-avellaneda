@@ -43,11 +43,11 @@ export default function CardMapReact({
         <h3 className="font-semibold text-xl tracking-normal truncate">
           {title}
         </h3>
-        <ul className="flex gap-1 flex-wrap w-full">
+        <ul className="grid grid-rows-2 grid-flow-col justify-stretch gap-1 w-full overflow-auto">
           {tags.map((subItem, index) => (
             <li
               key={index}
-              className={`w-fit text-sm px-2 py-1 rounded-md ${
+              className={`w-full h-full text-sm px-2 py-1 rounded-md flex items-center justify-center ${
                 (index + 1) % 2 === 0 && (index + 1) % 4 !== 0
                   ? "bg-sky-500/10 text-sky-500/80"
                   : (index + 1) % 3 === 0
