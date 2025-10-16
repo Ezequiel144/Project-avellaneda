@@ -13,7 +13,6 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
-
 ---
 
 <html lang="en">
@@ -22,10 +21,15 @@ const { title, description, ogImage } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/svg/favincon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content={description}
+    <meta name="description" content={description} />
+    <!-- libreria swipper(carruseles)-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
     />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"
+    ></script>
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

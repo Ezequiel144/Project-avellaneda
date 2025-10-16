@@ -1,0 +1,45 @@
+---
+import envVariants from "../../../helpers/envVariants";
+import type { PromotionImagens } from "../../../interface/promotions";
+import { strapiFetch } from "../../../utils/fetch";
+
+const { URL_STRAPI } = envVariants();
+
+const promotionsRes = await strapiFetch("/promotions?populate[imagen][fields][0]=url", {
+  method: "GET",
+});
+
+//console.log(promotionsRes.data);
+---
+
+{
+    promotionsRes.data.length === 0 ? (
+        <></>
+    ) : 
+    <section class="mt-6 swiper mySwiper rounded-lg overflow-hidden border border-gray-300">
+    <ul class="w-full swiper-wrapper h-fit md:max-h-[500px]">
+        {
+        promotionsRes.data.map((item: PromotionImagens) => (
+            <li class="size-full swiper-slide">
+            <img
+                class="size-full object-cover object-center"
+                src={`${URL_STRAPI}${item.imagen.url}`}
+                alt={`promotion-${item.Title}`}
+            />
+            </li>
+        ))
+        }
+    </ul>
+    <div class="swiper-pagination"></div>
+    </section>
+}
+<script type="module">
+  import Swiper from "https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.mjs";
+
+  var swiper = new Swiper(".mySwiper", {
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: true,
+    },
+  });
+</script>
