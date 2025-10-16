@@ -23,7 +23,7 @@ const promotionsRes = await strapiFetch("/promotions?populate[imagen][fields][0]
             <li class="size-full swiper-slide">
             <img
                 class="size-full object-cover object-center"
-                src={`${URL_STRAPI}${item.imagen.url}`}
+                src={`${item.imagen.url}`}
                 alt={`promotion-${item.Title}`}
             />
             </li>
