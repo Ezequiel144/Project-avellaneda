@@ -27,12 +27,12 @@ export default function ({
         )}
       </a>
       <div className="p-2 flex flex-col gap-y-2">
-        <h3 className="font-semibold text-xl">{title}</h3>
+        <h3 className="font-semibold text-lg sm:text-xl">{title}</h3>
         <ul className="flex flex-wrap gap-1">
           {tags.map((subItem, index) => (
             <li
               key={index}
-              className={`w-fit text-sm px-2 py-1 rounded-md ${
+              className={`w-fit text-xs sm:text-sm px-2 py-1 rounded-md ${
                 (index + 1) % 2 === 0 && (index + 1) % 4 !== 0
                   ? "bg-sky-500/10 text-sky-500/80"
                   : (index + 1) % 3 === 0
@@ -48,11 +48,11 @@ export default function ({
             </li>
           ))}
         </ul>
-        <p>{shortDescription}</p>
+        <p className="font-normal text-sm sm:text-base">{shortDescription}</p>
       </div>
       <a
         href={`/userid/${id}`}
-        className="w-full py-4 bg-red-500 text-white text-base md:text-xl font-semibold text-center"
+        className="w-full py-4 bg-red-500 text-white  sm:text-base md:text-xl font-semibold text-center"
       >
         Ver local
       </a>

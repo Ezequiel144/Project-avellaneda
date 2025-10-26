@@ -5,6 +5,7 @@ import { normalizeString } from "../../helpers/deleteAcent";
 import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
 import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
+import CardBusiness from "../Home/Business/ContentCard/CardBusiness";
 
 export default function BusinessLocals() {
   const [isFilterCategory, seyIsFilterCategory] = useState<BusinessItemCard[]>(
@@ -124,9 +125,9 @@ export default function BusinessLocals() {
   /* console.log(isFilterCategory); */
 
   return (
-    <ul className="gap-5 grid grid-cols-[repeat(auto-fit,minmax(282px,1fr))]">
+    <ul className="gap-5 grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(282px,1fr))]">
       {isFilterCategory.map((item) => (
-        <ReactCardFilter
+        <CardBusiness
           key={item.id}
           id={item.id}
           imageLogo={item.imagelogo.url}
