@@ -8,10 +8,10 @@ export default function SidebarMenu({
   setIsActive: (x: boolean) => void;
 }) {
   const listMenu = [
-    { title: "Galeria", link: "/galeries" },
+    { title: "Galerias", link: "/galeries" },
     { title: "Locales", link: "/locals" },
     { title: "Mapa", link: "/maps" },
-    { title: "Contactar", link: "#" },
+    { title: "Contactar", link: "https://wa.me/+541162709531?text=Quiero%20que%20mi%20negocio%20este%20en%20Informes%20Avellaneda" },
   ];
 
   return (
