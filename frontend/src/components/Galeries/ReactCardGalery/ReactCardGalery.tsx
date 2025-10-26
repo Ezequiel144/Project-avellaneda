@@ -11,7 +11,7 @@ export default function ReactCardGalery({
   return (
     <li className="w-full sm:w-fit h-fit rounded-xl overflow-hidden flex flex-row gap-5 border border-black/20 shadow-xl p-6 mb-3 sm:mb-0">
       <a
-        className="size-[100px] sm:size-[180px] rounded-lg overflow-hidden"
+        className="size-[100px] sm:size-[180px] rounded-lg overflow-hidden border border-black/20"
         href={`/userid/${id}`}
       >
         {imageLogo ? (
