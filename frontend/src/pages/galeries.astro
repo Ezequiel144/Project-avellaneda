@@ -1,24 +1,28 @@
 ---
 import CardGaleries from "../components/Galeries/CardGaleries.astro";
 import ModalGaleries from "../components/Galeries/ModalGaleries";
+import ReactPagination from "../components/Galeries/ReactPagination/ReactPagination";
 import type { GaleryItem } from "../interface";
 //import listGaleries from "../data/Galeries.data.json";
 import Layout from "../layouts/Layout.astro";
 import { strapiFetch } from "../utils/fetch";
 
+const page = Number(Astro.url.searchParams.get("p")) || 1;
+
 const res = await strapiFetch(
-  "/galeries?populate[image][fields][0]=url&populate=direction",
+  "/galeries?populate[image][fields][0]=url&populate=direction&pagination[pageSize]=2&pagination[page]=" + page,
   {
     method: "GET",
-  }
+  },
 );
 
-//console.log(res.data);
+//console.log(res.meta.pagination);
 
 const listGaleries = res.data as GaleryItem[];
 ---
 
-<Layout   title="Informes Avellaneda | Encuentra negocios en un solo lugar"
+<Layout
+  title="Informes Avellaneda | Encuentra negocios en un solo lugar"
   description="Descubrí en un solo lugar todos los negocios de Flores Avellaneda, Buenos Aires. Desde locales de ropa, gastronomía, calzado y accesorios, hasta servicios.Nuestro objetivo es acercarte las mejores opciones de la zona, ayudarte a encontrar lo que buscás y apoyar a los comercios locales que día a día crecen con su esfuerzo y dedicación. Explorá, buscá y conectá con los locales de Flores Avellaneda de manera rápida y sencilla."
 >
   <section class="w-full h-[320px] relative">
@@ -34,7 +38,7 @@ const listGaleries = res.data as GaleryItem[];
     />
   </section>
   <ul
-    class="w-full max-w-[1200px] mx-auto gap-6 grid grid-cols-1 md:grid-cols-2 justify-between my-12 px-3 xl:px-0 "
+    class="w-full max-w-[1200px] mx-auto gap-6 grid grid-cols-1 md:grid-cols-2 justify-between my-12 px-3 xl:px-0"
   >
     {
       listGaleries.map((item) => (
@@ -52,4 +56,5 @@ const listGaleries = res.data as GaleryItem[];
     client:idle
     listGaleries={listGaleries}
   />
+  <ReactPagination client:idle page={res.meta.pagination.page} pagesize={res.meta.pagination.pageSize} total={res.meta.pagination.total} pagecount={res.meta.pagination.pageCount} />
 </Layout>
