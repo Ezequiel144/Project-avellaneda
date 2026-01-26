@@ -4,7 +4,6 @@ import { IoIosAlert } from "react-icons/io";
 import { normalizeString } from "../../helpers/deleteAcent";
 import type { BusinessItemCard } from "../../interface";
 import { strapiFetch } from "../../utils/fetch";
-import ReactCardFilter from "./ReactCardFilter/ReactCardFilter";
 import CardBusiness from "../Home/Business/ContentCard/CardBusiness";
 
 export default function BusinessLocals() {
