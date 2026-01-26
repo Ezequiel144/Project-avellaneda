@@ -72,7 +72,7 @@ export function ReactContentGalery({ documentId }: { documentId: string }) {
     <div className="flex flex-col gap-y-5">
       <p>{filterBusinesses?.length || 0} locales en total</p>
       <ReactInputSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {listBusinessesFilter ? (
+      {listBusinessesFilter?.length !== 0 ? (
         <ul className="gap-5 grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(282px,1fr))]">
           {filterBusinesses?.map((business) => (
             <ReactCardFilter

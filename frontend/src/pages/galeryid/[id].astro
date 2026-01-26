@@ -43,21 +43,23 @@ const openGraphImage = galery?.image?.url;
       >
       </div>
       <div
-        class="z-10 absolute bottom-4 left-4 text-white flex flex-col gap-y-2 mx-auto"
+        class="z-10 absolute bottom-4 left-1/2 -translate-x-1/2 text-white flex flex-col gap-y-2 w-full max-w-[1200px] px-3 xl:px-0"
       >
         <span class="text-2xl">Galeria</span>
-        <h1 class="text-4xl font-bold">
+        <h1 class="text-3xl sm:text-4xl font-bold">
           {galery?.title}
         </h1>
       </div>
     </article>
-    <article class="max-w-[1200px] mx-auto w-full flex flex-col gap-y-5">
-      <div class="w-full flex gap-x-5">
+    <article
+      class="max-w-[1200px] mx-auto w-full flex flex-col gap-y-5 px-3 xl:px-0"
+    >
+      <div class="w-full flex gap-5 md:flex-row flex-col">
         <ItemsKeys />
         <Ubication direction={galery?.direction} />
       </div>
       <div class="flex flex-col gap-y-5">
-        <h2 class="text-4xl font-semibold">Locales</h2>
+        <h2 class="text:3xl sm:text-4xl font-semibold">Locales</h2>
         <ReactContentGalery client:idle documentId={id} />
       </div>
     </article>
