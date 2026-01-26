@@ -1,0 +1,50 @@
+---
+import type { GaleryItem } from "../../interface/business";
+import Layout from "../../layouts/Layout.astro";
+import { strapiFetch } from "../../utils/fetch";
+
+const { id } = Astro.params;
+
+const current = async () => {
+  const res = await strapiFetch(
+    `/galeries/${id}?populate[image][fields][0]=url&populate=direction`,
+    {
+      method: "GET",
+    },
+  );
+  return res.data as GaleryItem;
+};
+
+const galery = await current();
+
+const pageTitle = `${galery?.title} | Informes Avellaneda`;
+const pageDescription = "";
+const openGraphImage = galery?.image?.url;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription || ""}
+  ogImage={openGraphImage}
+>
+  <section class="size-full flex flex-col gap-y-9 h-fit">
+    <article class="h-[400px] md:h-[590px] w-full relative">
+      <img
+        src={`${galery?.image?.url}`}
+        alt="imagen-front"
+        class="size-full object-cover -z-10"
+        onerror="this.onerror=null; this.src='/image/no-image.png';"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"
+      >
+      </div>
+      <div class="z-10 absolute bottom-4 left-4 text-white flex flex-col gap-y-2 mx-auto">
+        <span class="text-2xl">Galeria</span>
+        <h1 class="text-4xl font-bold">
+          {galery?.title}
+        </h1>
+      </div>
+    </article>
+  </section>
+</Layout>

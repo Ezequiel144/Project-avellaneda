@@ -33,8 +33,12 @@ const { title, direction, image, id } = Astro.props as GaleryItem;
       />
     </div>
   </div>
-  <ButtonCards
+  <!-- <ButtonCards
     title="Ver Galeria"
     link={`/galeries?m=${encodeURIComponent(id)}`}
+  /> -->
+  <ButtonCards
+    title="Ver Galeria"
+    link={`/galeryid/${id}`}
   />
 </li>

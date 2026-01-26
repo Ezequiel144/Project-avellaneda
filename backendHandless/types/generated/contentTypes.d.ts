@@ -502,6 +502,7 @@ export interface ApiGaleryGalery extends Struct.CollectionTypeSchema {
     direction: Schema.Attribute.Component<'shared.direction', false>;
     idgaleries: Schema.Attribute.UID;
     image: Schema.Attribute.Media<'images'>;
+    keys: Schema.Attribute.Component<'shared.tag', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

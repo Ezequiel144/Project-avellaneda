@@ -29,6 +29,11 @@
       "type": "component",
       "component": "shared.direction",
       "repeatable": false
+    },
+    "keys": {
+      "type": "component",
+      "component": "shared.tag",
+      "repeatable": true
     }
   }
 }

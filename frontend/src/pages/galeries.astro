@@ -1,6 +1,5 @@
 ---
 import CardGaleries from "../components/Galeries/CardGaleries.astro";
-import ModalGaleries from "../components/Galeries/ModalGaleries";
 import ReactPagination from "../components/Galeries/ReactPagination/ReactPagination";
 import type { GaleryItem } from "../interface";
 //import listGaleries from "../data/Galeries.data.json";
@@ -52,16 +51,10 @@ const listGaleries = res.data as GaleryItem[];
       ))
     }
   </ul>
-  <ModalGaleries
+  <!-- <ModalGaleries
     transition:animate="slide"
     client:idle
     listGaleries={listGaleries}
-  />
+  /> -->
   <ReactPagination client:idle page={res.meta.pagination.page} pagesize={res.meta.pagination.pageSize} total={res.meta.pagination.total} pagecount={res.meta.pagination.pageCount} />
 </Layout>
-
-<script is:inline>
-  // Aquí puedes agregar lógica adicional si es necesario
-  let idDocumentSelected = null;
-  
-</script>
