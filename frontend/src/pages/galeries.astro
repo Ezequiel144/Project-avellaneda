@@ -10,7 +10,7 @@ import { strapiFetch } from "../utils/fetch";
 const page = Number(Astro.url.searchParams.get("p")) || 1;
 
 const res = await strapiFetch(
-  "/galeries?populate[image][fields][0]=url&populate=direction&pagination[pageSize]=2&pagination[page]=" + page,
+  `/galeries?populate[image][fields][0]=url&populate=direction&pagination[pageSize]=12&pagination[page]=${page}`,
   {
     method: "GET",
   },
@@ -19,6 +19,7 @@ const res = await strapiFetch(
 //console.log(res.meta.pagination);
 
 const listGaleries = res.data as GaleryItem[];
+//console.log(listGaleries.length);
 ---
 
 <Layout
@@ -46,7 +47,7 @@ const listGaleries = res.data as GaleryItem[];
           title={item.title}
           image={item.image}
           direction={item.direction}
-          id={item.id}
+          id={item.documentId}
         />
       ))
     }
@@ -58,3 +59,9 @@ const listGaleries = res.data as GaleryItem[];
   />
   <ReactPagination client:idle page={res.meta.pagination.page} pagesize={res.meta.pagination.pageSize} total={res.meta.pagination.total} pagecount={res.meta.pagination.pageCount} />
 </Layout>
+
+<script is:inline>
+  // Aquí puedes agregar lógica adicional si es necesario
+  let idDocumentSelected = null;
+  
+</script>

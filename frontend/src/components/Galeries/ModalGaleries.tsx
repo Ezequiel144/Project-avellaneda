@@ -32,19 +32,13 @@ export default function ModalGaleries({
           "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=galery",
           {
             method: "GET",
-          }
+          },
         );
         const fetchedBusinesses = res.data as BusinessItemCardGalery[];
 
-        // 2. Encontrar la galería correcta del listado inicial.
-        const galeryFound = listGaleries.find(
-          (gal) => gal.id.toString() === currentId
-        );
-        setGalery(galeryFound || null);
-
         // 3. Filtrar los negocios con los datos recién obtenidos.
         const newListBusiness = fetchedBusinesses.filter(
-          (item) => item?.galery?.id.toString() === currentId
+          (item) => item?.galery?.documentId.toString() === currentId,
         );
         //console.log(fetchedBusinesses);
         setBusinessFiltered(newListBusiness);
@@ -54,8 +48,26 @@ export default function ModalGaleries({
       }
     };
 
+    const fetchedGalery = async (documentId: string) => {
+      try {
+        setIsLoading(true);
+        const res = await strapiFetch(
+          `/galeries/${documentId}?populate[image][fields][0]=url&populate=direction`,
+          {
+            method: "GET",
+          },
+        );
+        const galeryData = res.data as GaleryItem;
+        setGalery(galeryData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error al obtener la galería:", error);
+      }
+    };
+
     if (id) {
       fetchAndFilterBusinesses(id);
+      fetchedGalery(id);
     }
   }, [listGaleries]); // Se ejecuta al montar y cuando `listGaleries` cambie.
 
@@ -107,7 +119,7 @@ export default function ModalGaleries({
                 ", " +
                 galery?.direction.province +
                 ", " +
-                galery?.direction.country
+                galery?.direction.country,
             )}`}
             target="_blank"
             rel="noopener noreferrer"
