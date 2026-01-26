@@ -1,4 +1,6 @@
 ---
+import ItemsKeys from "../../components/GaleryId/ItemsKeys.astro";
+import Ubication from "../../components/GaleryId/Ubication.astro";
 import type { GaleryItem } from "../../interface/business";
 import Layout from "../../layouts/Layout.astro";
 import { strapiFetch } from "../../utils/fetch";
@@ -39,11 +41,24 @@ const openGraphImage = galery?.image?.url;
         class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"
       >
       </div>
-      <div class="z-10 absolute bottom-4 left-4 text-white flex flex-col gap-y-2 mx-auto">
+      <div
+        class="z-10 absolute bottom-4 left-4 text-white flex flex-col gap-y-2 mx-auto"
+      >
         <span class="text-2xl">Galeria</span>
         <h1 class="text-4xl font-bold">
           {galery?.title}
         </h1>
+      </div>
+    </article>
+    <article class="max-w-[1200px] mx-auto w-full">
+      <div class="w-full flex gap-x-5">
+        <ItemsKeys />
+        <Ubication direction={galery?.direction} />
+      </div>
+      <div class="flex flex-col gap-y-5">
+        <h2 class="text-4xl font-semibold">Locales</h2>
+        <p>12 locales en total</p>
+        
       </div>
     </article>
   </section>

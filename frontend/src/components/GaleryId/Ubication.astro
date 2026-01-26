@@ -1,0 +1,21 @@
+---
+import type { Direction } from "../../interface/business";
+
+const { direction } = Astro.props as { direction: Direction };
+
+const address = `${direction.street} ${direction.number}, ${direction.locality}, ${direction.province}, ${direction.country}`;
+
+const src = `https://www.google.com/maps?q=${encodeURIComponent(
+  address,
+)}&output=embed`;
+---
+
+<div class="rounded-xl overflow-hidden w-full h-fit">
+  <iframe
+    title="Mapa"
+    src={src}
+    class="w-full h-[500px]"
+    style="border:0"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
