@@ -52,6 +52,7 @@ export interface GaleryItem {
   id: number /* string; */;
   title: string;
   direction: Direction; // Referencia a la dirección del negocio (opcional, en este caso coincide)
+  keys: { id: number; itemtag: string }[];
   image?: {
     id: string;
     documentId: string;

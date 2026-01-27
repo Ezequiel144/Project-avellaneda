@@ -10,7 +10,7 @@ const { id } = Astro.params as { id: string };
 
 const current = async () => {
   const res = await strapiFetch(
-    `/galeries/${id}?populate[image][fields][0]=url&populate=direction`,
+    `/galeries/${id}?populate[image][fields][0]=url&populate[direction]=*&populate[keys]=*`,
     {
       method: "GET",
     },
@@ -23,6 +23,8 @@ const galery = await current();
 const pageTitle = `${galery?.title} | Informes Avellaneda`;
 const pageDescription = "";
 const openGraphImage = galery?.image?.url;
+
+//console.log(galery);
 ---
 
 <Layout
@@ -55,7 +57,7 @@ const openGraphImage = galery?.image?.url;
       class="max-w-[1200px] mx-auto w-full flex flex-col gap-y-5 px-3 xl:px-0"
     >
       <div class="w-full flex gap-5 md:flex-row flex-col">
-        <ItemsKeys />
+        <ItemsKeys keys={galery?.keys.map((item) => item.itemtag) || []} />
         <Ubication direction={galery?.direction} />
       </div>
       <div class="flex flex-col gap-y-5">

@@ -9,7 +9,7 @@ import { strapiFetch } from "../utils/fetch";
 const page = Number(Astro.url.searchParams.get("p")) || 1;
 
 const res = await strapiFetch(
-  `/galeries?populate[image][fields][0]=url&populate=direction&pagination[pageSize]=12&pagination[page]=${page}`,
+  `/galeries?populate[image][fields][0]=url&populate=direction&pagination[pageSize]=12&pagination[page]=${page}&sort[0]=title:asc`,
   {
     method: "GET",
   },
@@ -56,5 +56,11 @@ const listGaleries = res.data as GaleryItem[];
     client:idle
     listGaleries={listGaleries}
   /> -->
-  <ReactPagination client:idle page={res.meta.pagination.page} pagesize={res.meta.pagination.pageSize} total={res.meta.pagination.total} pagecount={res.meta.pagination.pageCount} />
+  <ReactPagination
+    client:idle
+    page={res.meta.pagination.page}
+    pagesize={res.meta.pagination.pageSize}
+    total={res.meta.pagination.total}
+    pagecount={res.meta.pagination.pageCount}
+  />
 </Layout>
