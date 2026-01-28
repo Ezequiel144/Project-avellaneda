@@ -1,5 +1,6 @@
 ---
 import Business from "../components/Home/Business/Business.astro";
+import Galeries from "../components/Home/Galeries/Galeries.astro";
 import Hero from "../components/Home/Hero.astro";
 import Promotions from "../components/Home/Promotions/Promotions.astro";
 import Layout from "../layouts/Layout.astro";
@@ -11,7 +12,8 @@ import Layout from "../layouts/Layout.astro";
 >
   <Hero />
   <div class="max-w-[1200px] h-fit mx-auto px-3 xl:px-0">
-    <Promotions server:defer/>
+    <Promotions server:defer />
+    <Galeries />
     <Business />
   </div>
 </Layout>
