@@ -25,6 +25,15 @@ export default function ContentCardGeleries() {
   }, []);
 
   //console.log(isGaleries);
+  if (loading) {
+    return (
+      <div className="w-full text-center flex flex-col gap-y-2 items-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+        <p className="text-gray-500">Cargando galerías...</p>
+      </div>
+    );
+  }
+
   return (
     <ul
       className="grid
