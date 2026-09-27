@@ -1,10 +1,16 @@
 import { defaultOptions } from "./configApi";
 
-export const strapiFetch = async (endpoint: string, { ...prop }) => {
+export const strapiFetch = async (
+  endpoint: string,
+  options: RequestInit = {},
+) => {
   try {
     const response = await fetch(`${defaultOptions.urlApi}${endpoint}`, {
-      ...prop,
-      headers: defaultOptions.headers,
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      },
     });
 
     if (!response.ok) {
