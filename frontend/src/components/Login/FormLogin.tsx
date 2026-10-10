@@ -1,5 +1,5 @@
+import { actions } from "astro:actions";
 import { useState } from "react";
-import { strapiFetch } from "../../utils/fetch";
 
 export default function FormLogin() {
   const [inputForm, setInputForm] = useState<{
@@ -10,9 +10,12 @@ export default function FormLogin() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
+    setLoading(true);
+    /*  try {
       const response = await strapiFetch("/auth/local", {
         method: "POST",
         body: JSON.stringify({
@@ -24,8 +27,32 @@ export default function FormLogin() {
       console.log("Login correcto:", response);
     } catch (error) {
       console.error("Error en login:", error);
+    } */
+
+    try {
+      const { data, error } = await actions.login({
+        identifier: inputForm.user,
+        password: inputForm.password,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      //console.log("Login correcto:", data);
+
+      //window.location.href = "/admin/home";
+    } catch (error) {
+      console.error("Error en login:", error);
+    } finally {
+      setLoading(false);
+      window.location.href = "/admin/home";
     }
   };
+
+  if (loading) {
+    return <div className="text-center">Cargando...</div>;
+  }
 
   return (
     <form className="flex flex-col gap-y-2 w-[500px]" onSubmit={handleSubmit}>

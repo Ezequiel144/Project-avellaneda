@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Sidebarlayout from "../components/Admin/sidebarlayout.astro";
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ interface Props {
 const { title, description, ogImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -35,6 +36,7 @@ const { title, description, ogImage } = Astro.props;
   </head>
 
   <body>
+    <Sidebarlayout />
     <slot />
   </body>
   <ClientRouter />
@@ -46,6 +48,8 @@ const { title, description, ogImage } = Astro.props;
       height: 100vh;
       font-family: "Montserrat Variable", sans-serif;
       position: relative;
+      display: flex;
+      flex-direction: row;
     }
   </style>
 </html>

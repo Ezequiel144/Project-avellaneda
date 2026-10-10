@@ -1,0 +1,95 @@
+---
+const menuItems = [
+  {
+    name: "Inicio",
+    href: "/admin/home",
+    icon: "🏠",
+  },
+  {
+    name: "Negocios",
+    href: "/admin/businesses",
+    icon: "🏪",
+  },
+  {
+    name: "Categorías",
+    href: "/admin/categories",
+    icon: "📁",
+  },
+  {
+    name: "Promociones",
+    href: "/admin/promotions",
+    icon: "🎟️",
+  },
+];
+---
+
+<aside
+  class="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col border-r border-gray-200 bg-[#45313] shadow-sm "
+>
+  <!-- Logo -->
+  <div class="flex h-20 items-center border-b border-gray-200 px-6">
+    <div>
+      <h1 class="text-lg font-bold tracking-tight text-gray-900">
+        Informes
+      </h1>
+
+      <p class="text-sm font-medium text-blue-500">
+        Avellaneda
+      </p>
+    </div>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="flex-1 px-4 py-6">
+    <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+      Administración
+    </p>
+
+    <ul class="space-y-1">
+      {
+        menuItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-600 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
+            >
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 text-base transition group-hover:bg-blue-100">
+                {item.icon}
+              </span>
+
+              <span>{item.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <!-- Usuario / Logout -->
+  <div class="border-t border-gray-200 p-4">
+    <div class="mb-3 flex items-center gap-3 rounded-xl bg-gray-50 p-3">
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 font-semibold text-white"
+      >
+        IA
+      </div>
+
+      <div class="min-w-0">
+        <p class="truncate text-sm font-semibold text-gray-900">
+          Administrador
+        </p>
+
+        <p class="truncate text-xs text-gray-500">
+          Panel de administración
+        </p>
+      </div>
+    </div>
+
+    <button
+      class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-500 transition hover:bg-red-50 hover:text-red-600"
+    >
+      <span>🚪</span>
+      <span>Cerrar sesión</span>
+    </button>
+  </div>
+</aside>

@@ -1,0 +1,47 @@
+---
+import LayoutLoging from "../../layouts/LayoutLoging.astro";
+import { strapiFetchjwt } from "../../utils/fetchjwt";
+
+const jwt = Astro.cookies.get("jwt")?.value;
+let businesses = [];
+
+try {
+  const res = await strapiFetchjwt(
+    "/businesses?fields[0]=title&fields[1]=shortdescription&populate[imagelogo][fields][0]=url&populate[tags][fields][0]=*&populate=galery",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    },
+  );
+
+  businesses = res.data;
+} catch (error) {
+  console.error("Error al obtener negocios:", error);
+} 
+---
+
+<LayoutLoging title="" description="">
+  <div class="p-10">
+    <h1 class="text-2xl font-bold text-blue-500">Bienvenido</h1>
+    <section>
+      <p>Cantidad de negocios: {businesses.length}</p>
+      <h2>Galerias</h2>
+      {
+        businesses.length === 0 ? (
+          <p>No hay negocios disponibles.</p>
+        ) : (
+          <ul>
+            {businesses.map((business: any) => (
+              <li>
+                <h3>{business.title}</h3>
+                <p>{business.shortdescription}</p>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+  </div>
+</LayoutLoging>
