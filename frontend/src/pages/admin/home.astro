@@ -1,4 +1,5 @@
 ---
+import type { BusinessItemCard } from "../../interface/business";
 import LayoutLoging from "../../layouts/LayoutLoging.astro";
 import { strapiFetchjwt } from "../../utils/fetchjwt";
 
@@ -19,7 +20,7 @@ try {
   businesses = res.data;
 } catch (error) {
   console.error("Error al obtener negocios:", error);
-} 
+}
 ---
 
 <LayoutLoging title="" description="">
@@ -28,20 +29,63 @@ try {
     <section>
       <p>Cantidad de negocios: {businesses.length}</p>
       <h2>Galerias</h2>
-      {
-        businesses.length === 0 ? (
-          <p>No hay negocios disponibles.</p>
-        ) : (
-          <ul>
-            {businesses.map((business: any) => (
-              <li>
-                <h3>{business.title}</h3>
-                <p>{business.shortdescription}</p>
-              </li>
-            ))}
-          </ul>
-        )
-      }
+
+      <div
+        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
+      >
+        <table class="w-full text-sm text-left rtl:text-right text-body">
+          <thead
+            class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium"> Titulo </th>
+              <th scope="col" class="px-6 py-3 font-medium"> Tags </th>
+              <th scope="col" class="px-6 py-3 font-medium"> Categoria </th>
+              <th scope="col" class="px-6 py-3 font-medium"> Imagen </th>
+              <th scope="col" class="px-6 py-3 font-medium">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              businesses.map((business: BusinessItemCard) => (
+                <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-heading whitespace-nowrap"
+                  >
+                    {business.title}
+                  </th>
+                  <td class="px-6 py-4">
+                    {" "}
+                    {business.tags?.map((tag) => tag.itemtag).join(", ")}{" "}
+                  </td>
+                  <td class="px-6 py-4">
+                    {" "}
+                    {business.category?.map((cat) => cat.title).join(", ")}{" "}
+                  </td>
+                  <td class="px-6 py-4">
+                    <img
+                      src={business.imagelogo?.url}
+                      alt={business.title}
+                      class="size-16 object-cover"
+                    />
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <a
+                      href="#"
+                      class="font-medium text-fg-brand hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </section>
   </div>
 </LayoutLoging>
