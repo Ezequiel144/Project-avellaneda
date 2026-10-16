@@ -1,0 +1,226 @@
+---
+import type { Category } from "../../interface/business";
+import LayoutLoging from "../../layouts/LayoutLoging.astro";
+import { strapiFetchjwt } from "../../utils/fetchjwt";
+
+const jwt = Astro.cookies.get("jwt")?.value;
+let categories: Category[] = [];
+let categoryLoadFailed = false;
+
+if (jwt) {
+  try {
+    const response = await strapiFetchjwt("/categories?fields[0]=title&fields[1]=documentId", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    categories = response.data;
+  } catch (error) {
+    console.error("Error al cargar categorías para el formulario:", error);
+    categoryLoadFailed = true;
+  }
+}
+
+const formMessage = Astro.url.searchParams.get("status");
+---
+
+<LayoutLoging title="Cargar negocio" description="Formulario para cargar un negocio">
+  <main class="w-full p-6 md:p-10">
+    <div class="mx-auto max-w-4xl">
+      <a href="/admin/galeries" class="text-sm font-medium text-blue-600 hover:underline">
+        ← Volver a negocios
+      </a>
+      <h1 class="mt-3 text-3xl font-bold text-gray-900">Cargar negocio</h1>
+      <p class="mt-2 text-gray-600">Completá los datos principales y la dirección del negocio.</p>
+
+      {
+        formMessage === "created" && (
+          <p class="mt-6 rounded-lg bg-green-50 p-4 text-green-800" role="status">
+            El negocio se creó y publicó correctamente.
+          </p>
+        )
+      }
+      {
+        formMessage === "invalid" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            Revisá los datos ingresados. El título, la descripción breve y todos los campos de dirección son obligatorios.
+          </p>
+        )
+      }
+      {
+        formMessage === "auth" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            Iniciá sesión nuevamente para poder cargar un negocio.
+          </p>
+        )
+      }
+      {
+        formMessage === "save" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            No se pudo guardar el negocio. Verificá la conexión e intentá de nuevo.
+          </p>
+        )
+      }
+      {
+        categoryLoadFailed && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-800" role="alert">
+            No se pudieron cargar las categorías. Podés continuar sin asignar una.
+          </p>
+        )
+      }
+      {
+        !jwt && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-800" role="alert">
+            Necesitás iniciar sesión para guardar un negocio.
+          </p>
+        )
+      }
+
+      <form
+        action="/api/businesses"
+        method="post"
+        class="mt-8 space-y-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8"
+      >
+        <section class="space-y-5">
+          <h2 class="text-xl font-semibold text-gray-900">Información del negocio</h2>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Nombre *</span>
+            <input
+              name="title"
+              type="text"
+              maxlength="100"
+              required
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Descripción breve *</span>
+            <input
+              name="shortdescription"
+              type="text"
+              maxlength="100"
+              required
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Descripción completa</span>
+            <textarea
+              name="longdescription"
+              rows="4"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            ></textarea>
+          </label>
+          <div class="grid gap-5 md:grid-cols-2">
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Categoría</span>
+              <select
+                name="categoryId"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              >
+                <option value="">Sin categoría</option>
+                {
+                  categories.map((category) => (
+                    <option value={category.documentId || category.id}>{category.title}</option>
+                  ))
+                }
+              </select>
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Etiquetas</span>
+              <input
+                name="tags"
+                type="text"
+                placeholder="Ej.: café, pastelería, desayuno"
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+              <span class="mt-1 block text-xs text-gray-500">Separalas con comas.</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <h2 class="text-xl font-semibold text-gray-900">Dirección</h2>
+          <div class="grid gap-5 md:grid-cols-2">
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">País *</span>
+              <input
+                name="country"
+                type="text"
+                value="Argentina"
+                maxlength="150"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Provincia *</span>
+              <input
+                name="province"
+                type="text"
+                value="Buenos Aires"
+                maxlength="150"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Localidad *</span>
+              <input
+                name="locality"
+                type="text"
+                value="Avellaneda"
+                maxlength="150"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Código postal *</span>
+              <input
+                name="postalcode"
+                type="number"
+                min="0"
+                step="1"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Calle *</span>
+              <input
+                name="street"
+                type="text"
+                maxlength="200"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Número *</span>
+              <input
+                name="number"
+                type="number"
+                min="1"
+                step="1"
+                required
+                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </label>
+          </div>
+        </section>
+
+        <div class="flex justify-end border-t border-gray-200 pt-6">
+          <button
+            type="submit"
+            disabled={!jwt}
+            class="rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+          >
+            Crear y publicar negocio
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</LayoutLoging>

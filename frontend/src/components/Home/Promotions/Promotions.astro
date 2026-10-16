@@ -1,9 +1,6 @@
 ---
-import envVariants from "../../../helpers/envVariants";
 import type { PromotionImagens } from "../../../interface/promotions";
 import { strapiFetch } from "../../../utils/fetch";
-
-const { URL_STRAPI } = envVariants();
 
 const promotionsRes = await strapiFetch("/promotions?populate[imagen][fields][0]=url", {
   method: "GET",
