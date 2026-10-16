@@ -6,23 +6,39 @@ import { strapiFetchjwt } from "../../utils/fetchjwt";
 const jwt = Astro.cookies.get("jwt")?.value;
 let categories: Category[] = [];
 let categoryLoadFailed = false;
+let galleries: { id: number; documentId: string; title: string }[] = [];
+let galleryLoadFailed = false;
 
 if (jwt) {
-  try {
-    const response = await strapiFetchjwt("/categories?fields[0]=title&fields[1]=documentId", {
+  const headers = { Authorization: `Bearer ${jwt}` };
+  const [categoryResult, galleryResult] = await Promise.allSettled([
+    strapiFetchjwt("/categories?fields[0]=title&fields[1]=documentId&pagination[pageSize]=100", {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    });
-    categories = response.data;
-  } catch (error) {
-    console.error("Error al cargar categorías para el formulario:", error);
+      headers,
+    }),
+    strapiFetchjwt("/galeries?fields[0]=title&fields[1]=documentId&pagination[pageSize]=100", {
+      method: "GET",
+      headers,
+    }),
+  ]);
+
+  if (categoryResult.status === "fulfilled") {
+    categories = categoryResult.value.data;
+  } else {
+    console.error("Error al cargar categorías para el formulario:", categoryResult.reason);
     categoryLoadFailed = true;
+  }
+
+  if (galleryResult.status === "fulfilled") {
+    galleries = galleryResult.value.data;
+  } else {
+    console.error("Error al cargar galerías para el formulario:", galleryResult.reason);
+    galleryLoadFailed = true;
   }
 }
 
 const formMessage = Astro.url.searchParams.get("status");
+
 ---
 
 <LayoutLoging title="Cargar negocio" description="Formulario para cargar un negocio">
@@ -44,7 +60,7 @@ const formMessage = Astro.url.searchParams.get("status");
       {
         formMessage === "invalid" && (
           <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
-            Revisá los datos ingresados. El título, la descripción breve y todos los campos de dirección son obligatorios.
+            Revisá los datos: completá los campos obligatorios, usá URLs válidas para redes y enlaces, y elegí solo archivos de imagen.
           </p>
         )
       }
@@ -52,6 +68,27 @@ const formMessage = Astro.url.searchParams.get("status");
         formMessage === "auth" && (
           <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
             Iniciá sesión nuevamente para poder cargar un negocio.
+          </p>
+        )
+      }
+      {
+        formMessage === "permission" && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-900" role="alert">
+            Tu cuenta no tiene permiso para crear negocios. En Strapi, habilitá <strong>Business → create</strong> para el rol de tu usuario en Ajustes → Users &amp; Permissions Plugin → Roles, y guardá los cambios.
+          </p>
+        )
+      }
+      {
+        formMessage === "upload-permission" && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-900" role="alert">
+            Tu cuenta no tiene permiso para subir imágenes. En Strapi, habilitá <strong>Upload → upload</strong> para el rol de tu usuario en Ajustes → Users &amp; Permissions Plugin → Roles.
+          </p>
+        )
+      }
+      {
+        formMessage === "upload" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            No se pudieron subir las imágenes a Strapi. Revisá la conexión o el archivo e intentá de nuevo.
           </p>
         )
       }
@@ -70,6 +107,13 @@ const formMessage = Astro.url.searchParams.get("status");
         )
       }
       {
+        galleryLoadFailed && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-800" role="alert">
+            No se pudieron cargar las galerías. Podés continuar sin asignar una.
+          </p>
+        )
+      }
+      {
         !jwt && (
           <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-800" role="alert">
             Necesitás iniciar sesión para guardar un negocio.
@@ -80,6 +124,7 @@ const formMessage = Astro.url.searchParams.get("status");
       <form
         action="/api/businesses"
         method="post"
+        enctype="multipart/form-data"
         class="mt-8 space-y-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8"
       >
         <section class="space-y-5">
@@ -105,12 +150,16 @@ const formMessage = Astro.url.searchParams.get("status");
             />
           </label>
           <label class="block">
-            <span class="mb-1 block text-sm font-medium text-gray-700">Descripción completa</span>
+            <span class="mb-1 block text-sm font-medium text-gray-700">Descripción completa (Markdown)</span>
             <textarea
               name="longdescription"
-              rows="4"
+              rows="8"
+              placeholder={"## Sobre el negocio\n\nContá qué ofrece, sus horarios o servicios.\n\n- Servicio destacado\n- Otro detalle"}
               class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
             ></textarea>
+            <span class="mt-1 block text-xs text-gray-500">
+              Se admite Markdown: títulos con #, listas con - y texto en **negrita**. Se mostrará con formato en la ficha pública.
+            </span>
           </label>
           <div class="grid gap-5 md:grid-cols-2">
             <label class="block">
@@ -128,16 +177,169 @@ const formMessage = Astro.url.searchParams.get("status");
               </select>
             </label>
             <label class="block">
-              <span class="mb-1 block text-sm font-medium text-gray-700">Etiquetas</span>
-              <input
-                name="tags"
-                type="text"
-                placeholder="Ej.: café, pastelería, desayuno"
-                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
-              />
-              <span class="mt-1 block text-xs text-gray-500">Separalas con comas.</span>
+              <span class="mb-1 block text-sm font-medium text-gray-700">Galería</span>
+              <select
+                name="galleryId"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              >
+                <option value="">Sin galería</option>
+                {
+                  galleries.map((gallery) => (
+                    <option value={gallery.documentId || gallery.id}>{gallery.title}</option>
+                  ))
+                }
+              </select>
             </label>
           </div>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Etiquetas</span>
+            <input
+              name="tags"
+              type="text"
+              placeholder="Ej.: café, pastelería, desayuno"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+            <span class="mt-1 block text-xs text-gray-500">Separalas con comas.</span>
+          </label>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <h2 class="text-xl font-semibold text-gray-900">Imágenes</h2>
+          <div class="grid gap-5 md:grid-cols-2">
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Imagen de portada</span>
+              <input
+                name="frontpage"
+                type="file"
+                accept="image/*"
+                class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:font-medium file:text-blue-700"
+              />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Logo</span>
+              <input
+                name="imagelogo"
+                type="file"
+                accept="image/*"
+                class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:font-medium file:text-blue-700"
+              />
+            </label>
+          </div>
+          <p class="text-xs text-gray-500">
+            Las imágenes se suben a la biblioteca de medios de Strapi y se vinculan al negocio.
+          </p>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900">Redes sociales</h2>
+              <p class="mt-1 text-sm text-gray-500">Agregá el nombre de la red y su URL.</p>
+            </div>
+            <button
+              type="button"
+              data-add-row="social-media-list"
+              data-template="social-media-template"
+              class="rounded-lg border border-blue-600 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+            >
+              + Agregar red
+            </button>
+          </div>
+          <div id="social-media-list" class="space-y-3">
+            <div class="dynamic-entry-row grid gap-3 md:grid-cols-[1fr_2fr_auto]">
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Red</span>
+                <input
+                  name="socialMediaTitle"
+                  type="text"
+                  maxlength="150"
+                  placeholder="Instagram"
+                  class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">URL</span>
+                <input
+                  name="socialMediaLink"
+                  type="url"
+                  placeholder="https://instagram.com/tu-negocio"
+                  class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                />
+              </label>
+              <button type="button" data-remove-row class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">
+                Quitar
+              </button>
+            </div>
+          </div>
+          <template id="social-media-template">
+            <div class="dynamic-entry-row grid gap-3 md:grid-cols-[1fr_2fr_auto]">
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Red</span>
+                <input name="socialMediaTitle" type="text" maxlength="150" placeholder="Instagram" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">URL</span>
+                <input name="socialMediaLink" type="url" placeholder="https://instagram.com/tu-negocio" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <button type="button" data-remove-row class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">Quitar</button>
+            </div>
+          </template>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900">Enlaces y botones</h2>
+              <p class="mt-1 text-sm text-gray-500">Por ejemplo: menú, reservas o WhatsApp.</p>
+            </div>
+            <button
+              type="button"
+              data-add-row="links-list"
+              data-template="links-template"
+              class="rounded-lg border border-blue-600 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+            >
+              + Agregar enlace
+            </button>
+          </div>
+          <div id="links-list" class="space-y-3">
+            <div class="dynamic-entry-row grid gap-3 md:grid-cols-[1fr_2fr_auto]">
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Texto del botón</span>
+                <input
+                  name="linkButtonTitle"
+                  type="text"
+                  maxlength="150"
+                  placeholder="Menú"
+                  class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">URL</span>
+                <input
+                  name="linkButtonLink"
+                  type="url"
+                  placeholder="https://ejemplo.com/menu"
+                  class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                />
+              </label>
+              <button type="button" data-remove-row class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">
+                Quitar
+              </button>
+            </div>
+          </div>
+          <template id="links-template">
+            <div class="dynamic-entry-row grid gap-3 md:grid-cols-[1fr_2fr_auto]">
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Texto del botón</span>
+                <input name="linkButtonTitle" type="text" maxlength="150" placeholder="Menú" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-sm font-medium text-gray-700">URL</span>
+                <input name="linkButtonLink" type="url" placeholder="https://ejemplo.com/menu" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <button type="button" data-remove-row class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">Quitar</button>
+            </div>
+          </template>
         </section>
 
         <section class="space-y-5 border-t border-gray-200 pt-7">
@@ -224,3 +426,35 @@ const formMessage = Astro.url.searchParams.get("status");
     </div>
   </main>
 </LayoutLoging>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const addButton = target.closest<HTMLButtonElement>("[data-add-row]");
+    if (addButton) {
+      const container = document.getElementById(addButton.dataset.addRow ?? "");
+      const template = document.getElementById(addButton.dataset.template ?? "");
+      if (container && template instanceof HTMLTemplateElement) {
+        container.append(template.content.cloneNode(true));
+      }
+      return;
+    }
+
+    const removeButton = target.closest<HTMLButtonElement>("[data-remove-row]");
+    if (!removeButton) return;
+
+    const row = removeButton.closest<HTMLElement>(".dynamic-entry-row");
+    const container = row?.parentElement;
+    if (!row || !container) return;
+
+    if (container.children.length > 1) {
+      row.remove();
+    } else {
+      row.querySelectorAll<HTMLInputElement>("input").forEach((input) => {
+        input.value = "";
+      });
+    }
+  });
+</script>
