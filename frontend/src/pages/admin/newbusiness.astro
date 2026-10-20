@@ -125,6 +125,7 @@ const formMessage = Astro.url.searchParams.get("status");
         action="/api/businesses"
         method="post"
         enctype="multipart/form-data"
+        data-business-form
         class="mt-8 space-y-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8"
       >
         <section class="space-y-5">
@@ -419,15 +420,53 @@ const formMessage = Astro.url.searchParams.get("status");
             disabled={!jwt}
             class="rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
           >
-            Crear y publicar negocio
+            <span data-submit-label>Crear y publicar negocio</span>
+            <span data-submit-spinner class="ml-2 hidden  h-4 w-4 animate-spin rounded-full border-2 border-white border-r-transparent align-[-3px]" aria-hidden="true"></span>
           </button>
         </div>
       </form>
+    </div>
+    <div
+      data-business-loading
+      hidden
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-6"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="flex items-center gap-4 rounded-xl bg-white px-6 py-5 shadow-xl">
+        <span class="h-7 w-7 animate-spin rounded-full border-4 border-blue-600 border-r-transparent" aria-hidden="true"></span>
+        <span class="font-medium text-gray-900">Creando el negocio, por favor esperá...</span>
+      </div>
     </div>
   </main>
 </LayoutLoging>
 
 <script>
+  const businessForm = document.querySelector<HTMLFormElement>("[data-business-form]");
+
+  businessForm?.addEventListener("submit", (event) => {
+    if (businessForm.dataset.submitting === "true") {
+      event.preventDefault();
+      return;
+    }
+
+    businessForm.dataset.submitting = "true";
+    businessForm.setAttribute("aria-busy", "true");
+
+    const loadingIndicator = document.querySelector<HTMLElement>("[data-business-loading]");
+    if (loadingIndicator) loadingIndicator.hidden = false;
+
+    const submitButton = businessForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!submitButton) return;
+
+    submitButton.disabled = true;
+    const submitLabel = submitButton.querySelector<HTMLElement>("[data-submit-label]");
+    if (submitLabel) submitLabel.textContent = "Creando negocio...";
+
+    const submitSpinner = submitButton.querySelector<HTMLElement>("[data-submit-spinner]");
+    submitSpinner?.classList.remove("hidden");
+  });
+
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;

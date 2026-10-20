@@ -26,17 +26,17 @@ try {
 <LayoutLoging title="" description="">
   <div class="flex flex-col p-10 w-full">
     <div class="mb-5 flex flex-wrap items-center justify-between gap-4">
-      <h1>Calegrias</h1>
+      <h1 class="text-xl font-bold text-heading">Galerías</h1>
       <a
-        href="/admin/newbusiness"
+        href="/admin/newgaleries"
         class="rounded-lg bg-blue-600 px-4 py-2.5 font-semibold text-white transition hover:bg-blue-700"
       >
-        + Cargar negocio
+        + Cargar galería
       </a>
     </div>
 
     <div
-      class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
+      class="relative overflow-x-auto bg-neutral-primary-soft rounded-xl shadow-sm border border-gray-200"
     >
       <div class="p-4">
         <label for="input-group-1" class="sr-only">Search</label>
@@ -63,17 +63,17 @@ try {
           <input
             type="text"
             id="input-group-1"
-            class="block w-full max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+            class="block w-full max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 shadow-xs placeholder:text-body"
             placeholder="Search"
           />
         </div>
       </div>
-      <table class="w-full text-sm text-left rtl:text-right text-body">
+      <table class="w-full text-sm text-left rtl:text-right text-body ">
         <thead
-          class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium"
+          class="text-sm text-body bg-neutral-secondary-medium bg-blue-50 text-blue-700"
         >
           <tr>
-            <th scope="col" class="p-4">
+            <!-- <th scope="col" class="p-4">
               <div class="flex items-center">
                 <input
                   id="table-checkbox-12"
@@ -85,7 +85,7 @@ try {
                   >Table checkbox</label
                 >
               </div>
-            </th>
+            </th> -->
             <th scope="col" class="px-6 py-3 font-medium"> Nombre</th>
             <!-- <th scope="col" class="px-6 py-3 font-medium"> Imagen</th> -->
             <th scope="col" class="px-6 py-3 font-medium"> Direccion </th>
@@ -96,8 +96,8 @@ try {
         <tbody>
           {
             galeries.map((gallery: GaleryItem) => (
-              <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                <td class="w-4 p-4">
+              <tr class="bg-neutral-primary-soft ">
+                {/* <td class="w-4 p-4">
                   <div class="flex items-center">
                     <input
                       id="table-checkbox-14"
@@ -109,7 +109,7 @@ try {
                       Table checkbox
                     </label>
                   </div>
-                </td>
+                </td> */}
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium text-heading whitespace-nowrap"
