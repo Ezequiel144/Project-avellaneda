@@ -1,46 +1,44 @@
 ---
+import { MdBusiness } from "react-icons/md";
+import { HiBuildingStorefront } from "react-icons/hi2";
+import { HiFolder } from "react-icons/hi";
+import { IoIosExit } from "react-icons/io";
+import { HiTicket } from "react-icons/hi";
 const menuItems = [
   {
-    name: "Inicio",
+    name: "Negocios",
     href: "/admin/home",
-    icon: "🏠",
   },
   {
-    name: "Negocios",
+    name: "Galerías",
     href: "/admin/galeries",
-    icon: "🏪",
   },
   {
     name: "Categorías",
     href: "/admin/categories",
-    icon: "📁",
   },
   {
     name: "Promociones",
     href: "/admin/promotions",
-    icon: "🎟️",
   },
 ];
 ---
 
-<aside
->
+<aside>
   <!-- Logo -->
   <div class="flex h-20 items-center border-b border-gray-200 px-6">
     <div>
-      <h1 class="text-lg font-bold tracking-tight text-gray-900">
-        Informes
-      </h1>
+      <h1 class="text-lg font-bold tracking-tight text-gray-900">Informes</h1>
 
-      <p class="text-sm font-medium text-blue-500">
-        Avellaneda
-      </p>
+      <p class="text-sm font-medium text-blue-500">Avellaneda</p>
     </div>
   </div>
 
   <!-- Navegación -->
   <nav class="flex-1 px-4 py-6">
-    <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+    <p
+      class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400"
+    >
       Administración
     </p>
 
@@ -53,7 +51,10 @@ const menuItems = [
               class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-600 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
             >
               <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 text-base transition group-hover:bg-blue-100">
-                {item.icon}
+                {item.name === "Negocios" && <MdBusiness size={24} />}
+                {item.name === "Galerías" && <HiBuildingStorefront size={24} />}
+                {item.name === "Categorías" && <HiFolder size={24} />}
+                {item.name === "Promociones" && <HiTicket size={24} />}
               </span>
 
               <span>{item.name}</span>
@@ -78,16 +79,14 @@ const menuItems = [
           Administrador
         </p>
 
-        <p class="truncate text-xs text-gray-500">
-          Panel de administración
-        </p>
+        <p class="truncate text-xs text-gray-500">Panel de administración</p>
       </div>
     </div>
 
     <button
       class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-500 transition hover:bg-red-50 hover:text-red-600"
     >
-      <span>🚪</span>
+      <span><IoIosExit /> </span>
       <span>Cerrar sesión</span>
     </button>
   </div>
