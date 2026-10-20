@@ -1,0 +1,249 @@
+---
+import LayoutLoging from "../../layouts/LayoutLoging.astro";
+
+const jwt = Astro.cookies.get("jwt")?.value;
+const formMessage = Astro.url.searchParams.get("status");
+
+---
+
+<LayoutLoging title="Cargar galería" description="Formulario para cargar una galería">
+  <main class="w-full p-6 md:p-10">
+    <div class="mx-auto max-w-4xl">
+      <a href="/admin/galeries" class="text-sm font-medium text-blue-600 hover:underline">
+        ← Volver a galerías
+      </a>
+      <h1 class="mt-3 text-3xl font-bold text-gray-900">Cargar galería</h1>
+      <p class="mt-2 text-gray-600">Completá los datos de la galería, su imagen, dirección y etiquetas.</p>
+
+      {
+        formMessage === "created" && (
+          <p class="mt-6 rounded-lg bg-green-50 p-4 text-green-800" role="status">
+            La galería se creó y publicó correctamente.
+          </p>
+        )
+      }
+      {
+        formMessage === "invalid" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            Revisá los datos obligatorios, los límites de caracteres, la dirección y que el archivo seleccionado sea una imagen.
+          </p>
+        )
+      }
+      {
+        formMessage === "auth" && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            Iniciá sesión nuevamente para poder cargar una galería.
+          </p>
+        )
+      }
+      {
+        formMessage === "permission" && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-900" role="alert">
+            Tu cuenta no tiene permiso para crear galerías. En Strapi, habilitá <strong>Galery → create</strong> para el rol de tu usuario en Ajustes → Users &amp; Permissions Plugin → Roles.
+          </p>
+        )
+      }
+      {
+        formMessage === "upload-permission" && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-900" role="alert">
+            Tu cuenta no tiene permiso para subir imágenes. En Strapi, habilitá <strong>Upload → upload</strong> para el rol de tu usuario.
+          </p>
+        )
+      }
+      {
+        (formMessage === "upload" || formMessage === "save") && (
+          <p class="mt-6 rounded-lg bg-red-50 p-4 text-red-800" role="alert">
+            No se pudo guardar la galería. Verificá la conexión y los permisos, e intentá de nuevo.
+          </p>
+        )
+      }
+      {
+        !jwt && (
+          <p class="mt-6 rounded-lg bg-amber-50 p-4 text-amber-800" role="alert">
+            Necesitás iniciar sesión para guardar una galería.
+          </p>
+        )
+      }
+
+      <form
+        action="/api/galeries"
+        method="post"
+        enctype="multipart/form-data"
+        data-gallery-form
+        class="mt-8 space-y-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:p-8"
+      >
+        <section class="space-y-5">
+          <h2 class="text-xl font-semibold text-gray-900">Información de la galería</h2>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Identificador *</span>
+            <input
+              name="idgaleries"
+              type="text"
+              required
+              placeholder="galeria-centro"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Título *</span>
+            <input
+              name="title"
+              type="text"
+              required
+              class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">Imagen</span>
+            <input
+              name="image"
+              type="file"
+              accept="image/*"
+              class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-blue-50 file:px-3 file:py-2 file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
+            />
+          </label>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <h2 class="text-xl font-semibold text-gray-900">Dirección</h2>
+          <div class="grid gap-5 md:grid-cols-2">
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">País *</span>
+              <input name="country" type="text" maxlength="150" required value="Argentina" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Provincia *</span>
+              <input name="province" type="text" maxlength="150" required value="Buenos Aires" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Localidad *</span>
+              <input name="locality" type="text" maxlength="150" required value="Avellaneda" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Código postal *</span>
+              <input name="postalcode" type="number" min="0" step="1" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Calle *</span>
+              <input name="street" type="text" maxlength="200" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+            <label class="block">
+              <span class="mb-1 block text-sm font-medium text-gray-700">Número *</span>
+              <input name="number" type="number" min="1" step="1" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+            </label>
+          </div>
+        </section>
+
+        <section class="space-y-5 border-t border-gray-200 pt-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900">Etiquetas</h2>
+              <p class="mt-1 text-sm text-gray-500">Agregá una o más palabras clave para identificar la galería.</p>
+            </div>
+            <button
+              type="button"
+              data-add-key
+              class="rounded-lg border border-blue-600 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+            >
+              + Agregar etiqueta
+            </button>
+          </div>
+          <div data-keys-list class="space-y-3">
+            <div class="key-row flex gap-3">
+              <label class="block flex-1">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Etiqueta</span>
+                <input name="itemtag" type="text" maxlength="100" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <button type="button" data-remove-key class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">
+                Quitar
+              </button>
+            </div>
+          </div>
+          <template data-key-template>
+            <div class="key-row flex gap-3">
+              <label class="block flex-1">
+                <span class="mb-1 block text-sm font-medium text-gray-700">Etiqueta</span>
+                <input name="itemtag" type="text" maxlength="100" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100" />
+              </label>
+              <button type="button" data-remove-key class="self-end rounded-lg px-3 py-2.5 text-sm text-red-700 hover:bg-red-50">
+                Quitar
+              </button>
+            </div>
+          </template>
+        </section>
+
+        <div class="flex justify-end border-t border-gray-200 pt-6">
+          <button
+            type="submit"
+            disabled={!jwt}
+            class="rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+          >
+            <span data-submit-label>Crear y publicar galería</span>
+            <span data-submit-spinner class="ml-2 hidden h-4 w-4 animate-spin rounded-full border-2 border-white border-r-transparent align-[-3px]" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div
+      data-gallery-loading
+      hidden
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-6"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="flex items-center gap-4 rounded-xl bg-white px-6 py-5 shadow-xl">
+        <span class="h-7 w-7 animate-spin rounded-full border-4 border-blue-600 border-r-transparent" aria-hidden="true"></span>
+        <span class="font-medium text-gray-900">Creando la galería, por favor esperá...</span>
+      </div>
+    </div>
+  </main>
+</LayoutLoging>
+
+<script>
+  const galleryForm = document.querySelector<HTMLFormElement>("[data-gallery-form]");
+  const keysList = document.querySelector<HTMLElement>("[data-keys-list]");
+  const keyTemplate = document.querySelector<HTMLTemplateElement>("[data-key-template]");
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    if (target.closest("[data-add-key]")) {
+      if (keysList && keyTemplate) keysList.append(keyTemplate.content.cloneNode(true));
+      return;
+    }
+
+    const removeButton = target.closest("[data-remove-key]");
+    if (!removeButton) return;
+
+    const row = removeButton.closest<HTMLElement>(".key-row");
+    if (!row || !keysList) return;
+    if (keysList.children.length > 1) {
+      row.remove();
+    } else {
+      const input = row.querySelector<HTMLInputElement>('input[name="itemtag"]');
+      if (input) input.value = "";
+    }
+  });
+
+  galleryForm?.addEventListener("submit", (event) => {
+    if (galleryForm.dataset.submitting === "true") {
+      event.preventDefault();
+      return;
+    }
+
+    galleryForm.dataset.submitting = "true";
+    galleryForm.setAttribute("aria-busy", "true");
+
+    const loadingIndicator = document.querySelector<HTMLElement>("[data-gallery-loading]");
+    if (loadingIndicator) loadingIndicator.hidden = false;
+
+    const submitButton = galleryForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!submitButton) return;
+
+    submitButton.disabled = true;
+    const submitLabel = submitButton.querySelector<HTMLElement>("[data-submit-label]");
+    if (submitLabel) submitLabel.textContent = "Creando galería...";
+    submitButton.querySelector<HTMLElement>("[data-submit-spinner]")?.classList.remove("hidden");
+  });
+</script>

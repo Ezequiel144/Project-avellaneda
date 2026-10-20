@@ -11,71 +11,83 @@ export default function FormLogin() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage("");
     setLoading(true);
-    /*  try {
-      const response = await strapiFetch("/auth/local", {
-        method: "POST",
-        body: JSON.stringify({
-          identifier: inputForm.user,
-          password: inputForm.password,
-        }),
-      });
-
-      console.log("Login correcto:", response);
-    } catch (error) {
-      console.error("Error en login:", error);
-    } */
 
     try {
-      const { data, error } = await actions.login({
-        identifier: inputForm.user,
+      const { error } = await actions.login({
+        identifier: inputForm.user.trim(),
         password: inputForm.password,
       });
 
       if (error) {
-        throw new Error(error.message);
+        setErrorMessage(error.message || "No se pudo iniciar sesión. Revisá tus datos e intentá de nuevo.");
+        return;
       }
 
-      //console.log("Login correcto:", data);
-
-      //window.location.href = "/admin/home";
+      window.location.assign("/admin/home");
     } catch (error) {
-      console.error("Error en login:", error);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "No se pudo iniciar sesión. Revisá tu conexión e intentá de nuevo.",
+      );
     } finally {
       setLoading(false);
-      window.location.href = "/admin/home";
     }
   };
 
-  if (loading) {
-    return <div className="text-center">Cargando...</div>;
-  }
-
   return (
-    <form className="flex flex-col gap-y-2 w-[500px]" onSubmit={handleSubmit}>
+    <form className="flex w-[min(500px,calc(100vw-2rem))] flex-col gap-y-2" onSubmit={handleSubmit}>
+      <label htmlFor="login-identifier" className="text-sm font-medium text-gray-700">
+        Usuario o correo electrónico
+      </label>
       <input
+        id="login-identifier"
+        name="identifier"
         type="text"
+        autoComplete="username"
+        required
+        disabled={loading}
         placeholder="Usuario"
-        className="border border-gray-300 rounded-md p-2 mb-4 w-full"
+        className="mb-4 w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100"
         value={inputForm.user}
         onChange={(e) => {
           setInputForm({ ...inputForm, user: e.target.value });
         }}
       />
+      <label htmlFor="login-password" className="text-sm font-medium text-gray-700">
+        Contraseña
+      </label>
       <input
+        id="login-password"
+        name="password"
         type="password"
+        autoComplete="current-password"
+        required
+        disabled={loading}
         placeholder="Contraseña"
-        className="border border-gray-300 rounded-md p-2 mb-4 w-full"
+        className="mb-4 w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100"
         value={inputForm.password}
         onChange={(e) => {
           setInputForm({ ...inputForm, password: e.target.value });
         }}
       />
-      <button className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
-        Ingresar
+      {errorMessage && (
+        <p className="mb-2 rounded-md bg-red-50 p-3 text-sm text-red-800" role="alert">
+          {errorMessage}
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={loading}
+        className="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600 disabled:cursor-wait disabled:opacity-70"
+      >
+        {loading ? "Ingresando..." : "Ingresar"}
       </button>
     </form>
   );
